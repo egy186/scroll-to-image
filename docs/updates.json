@@ -1,7 +1,12 @@
 {
   "addons": {
     "{d85e84a8-8446-4496-8585-66ef63f6e556}": {
-      "updates": []
+      "updates": [
+        {
+          "update_link": "https://github.com/egy186/scroll-to-image/releases/download/v0.2.0/scroll_to_image-0.2.0-an.fx.xpi",
+          "version": "0.2.0"
+        }
+      ]
     }
   }
 }

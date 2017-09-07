@@ -1,0 +1,38 @@
+{
+  "name": "Scroll to Image",
+  "description": "Scroll to the next image.",
+  "version": "0.1.2",
+  "applications": {
+    "gecko": {
+      "id": "{d85e84a8-8446-4496-8585-66ef63f6e556}",
+      "strict_min_version": "53.0",
+      "update_url": "https://egy186.github.io/scroll-to-image/updates.json"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "index.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "https://github.com/egy186/scroll-to-image#readme",
+  "icons": {
+    "48": "icon.png",
+    "96": "icon@2x.png"
+  },
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage"
+  ]
+}

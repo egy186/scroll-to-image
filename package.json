@@ -1,0 +1,34 @@
+{
+  "name": "scroll-to-image",
+  "description": "Scroll to the next image.",
+  "version": "0.1.2",
+  "author": "egy186",
+  "bugs": {
+    "url": "https://github.com/egy186/scroll-to-image/issues"
+  },
+  "devDependencies": {
+    "@egy186/eslint-config": "^0.28.0",
+    "eslint": "^4.6.1",
+    "npm-run-all": "^4.0.2",
+    "rimraf": "^2.6.1",
+    "web-ext": "^2.0.0"
+  },
+  "homepage": "https://github.com/egy186/scroll-to-image#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egy186/scroll-to-image.git"
+  },
+  "scripts": {
+    "build": "web-ext build --source-dir src",
+    "clean": "rimraf web-ext-artifacts",
+    "lint": "run-p lint:*",
+    "lint:js": "eslint .",
+    "lint:manifest": "web-ext lint --self-hosted --source-dir src",
+    "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET --source-dir src",
+    "start": "web-ext run --source-dir src",
+    "version": "node lib/version.js && git add docs/updates.json src/manifest.json"
+  }
+}

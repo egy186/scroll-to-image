@@ -4,12 +4,21 @@
   <meta charset="utf-8" />
   <title>Settings</title>
   <script src="options.js"></script>
+  <style>
+    input, textarea {
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
   <form id="settings">
     <p>
       <label for="fit-height">Fit Image Height</label>:
       <input id="fit-height" type="checkbox" />
+    </p>
+    <p>
+      <label for="scroll-to-first">Scroll to the first image</label>:
+      <input id="scroll-to-first" type="checkbox" />
     </p>
     <p>
       <label for="list">List</label>:

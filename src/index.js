@@ -4,7 +4,15 @@
   'use strict';
 
   // Restore options
-  const { fitHeight = false, list = [] } = await browser.storage.sync.get(['fitHeight', 'list']);
+  const {
+    fitHeight = false,
+    list = [],
+    scrollToFirst = false
+  } = await browser.storage.sync.get([
+    'fitHeight',
+    'list',
+    'scrollToFirst'
+  ]);
 
   const { selector } = list.find(config => new RegExp(config.pattern).test(location.href)) || {};
   const images = Array.from(document.querySelectorAll(selector));
@@ -26,6 +34,22 @@
     });
     let index = -1;
 
+    const scroll = dest => {
+      switch (dest) {
+        case 'first':
+          index = 0;
+          break;
+        case 'next':
+          index = index === ids.length - 1 ? 0 : index + 1;
+          break;
+        case 'prev':
+          index = index === 0 ? ids.length - 1 : index - 1;
+          break;
+        default:
+      }
+      location.hash = ids[index];
+    };
+
     // Scroll on `Space` or `Shift+Space`
     // Todo: make keybindings configurable
     addEventListener('keydown', evt => {
@@ -33,12 +57,16 @@
         evt.preventDefault();
         evt.stopPropagation();
         if (evt.shiftKey) {
-          index = index === 0 ? ids.length - 1 : index - 1;
+          scroll('prev');
         } else {
-          index = index === ids.length - 1 ? 0 : index + 1;
+          scroll('next');
         }
-        location.hash = ids[index];
       }
     }, false);
+
+    // Scroll to the first image
+    if (scrollToFirst) {
+      scroll('first');
+    }
   }
 })();

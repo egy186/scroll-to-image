@@ -19,7 +19,8 @@
 
     // Add id attr and make ids arr
     const ids = images.map((image, i) => {
-      const id = `scroll-to-image-${i + 1}`;
+      // Avoid overwriting existing id
+      const id = image.id === '' ? `scroll-to-image-${i + 1}` : image.id;
       image.id = id;
       return `#${id}`;
     });

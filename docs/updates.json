@@ -5,6 +5,10 @@
         {
           "update_link": "https://github.com/egy186/scroll-to-image/releases/download/v0.2.1/scroll_to_image-0.2.1-an.fx.xpi",
           "version": "0.2.1"
+        },
+        {
+          "update_link": "https://github.com/egy186/scroll-to-image/releases/download/v0.3.0/scroll_to_image-0.3.0-an.fx.xpi",
+          "version": "0.3.0"
         }
       ]
     }

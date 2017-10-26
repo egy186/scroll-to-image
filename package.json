@@ -11,7 +11,7 @@
     "eslint": "^4.9.0",
     "npm-run-all": "^4.0.2",
     "rimraf": "^2.6.1",
-    "web-ext": "^2.0.0"
+    "web-ext": "^2.2.2"
   },
   "homepage": "https://github.com/egy186/scroll-to-image#readme",
   "license": "MIT",

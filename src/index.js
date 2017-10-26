@@ -7,10 +7,12 @@
   const {
     fitHeight = false,
     list = [],
+    scrollAnimation = false,
     scrollToFirst = false
   } = await browser.storage.sync.get([
     'fitHeight',
     'list',
+    'scrollAnimation',
     'scrollToFirst'
   ]);
 
@@ -26,6 +28,7 @@
     }
 
     let index = -1;
+    const behavior = scrollAnimation ? 'smooth' : 'instant';
     const scroll = dest => {
       switch (dest) {
         case 'first':
@@ -40,7 +43,7 @@
         default:
       }
       images[index].scrollIntoView({
-        behavior: 'instant',
+        behavior,
         block: 'start'
       });
     };

@@ -50,8 +50,10 @@
       location.hash = ids[index];
     };
 
-    // Scroll on `Space` or `Shift+Space`
-    // Todo: make keybindings configurable
+    /*
+     * Scroll on `Space` or `Shift+Space`
+     * Todo: make keybindings configurable
+     */
     addEventListener('keydown', evt => {
       if (evt.keyCode === 32) {
         evt.preventDefault();

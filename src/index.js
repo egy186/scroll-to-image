@@ -7,10 +7,12 @@
   const {
     fitHeight = false,
     list = [],
+    scrollAnimation = false,
     scrollToFirst = false
   } = await browser.storage.sync.get([
     'fitHeight',
     'list',
+    'scrollAnimation',
     'scrollToFirst'
   ]);
 
@@ -25,29 +27,25 @@
       document.head.appendChild(css);
     }
 
-    // Add id attr and make ids arr
-    const ids = images.map((image, i) => {
-      // Avoid overwriting existing id
-      const id = image.id === '' ? `scroll-to-image-${i + 1}` : image.id;
-      image.id = id;
-      return `#${id}`;
-    });
     let index = -1;
-
+    const behavior = scrollAnimation ? 'smooth' : 'instant';
     const scroll = dest => {
       switch (dest) {
         case 'first':
           index = 0;
           break;
         case 'next':
-          index = index === ids.length - 1 ? 0 : index + 1;
+          index = index === images.length - 1 ? 0 : index + 1;
           break;
         case 'prev':
-          index = index === 0 ? ids.length - 1 : index - 1;
+          index = index === 0 ? images.length - 1 : index - 1;
           break;
         default:
       }
-      location.hash = ids[index];
+      images[index].scrollIntoView({
+        behavior,
+        block: 'start'
+      });
     };
 
     /*

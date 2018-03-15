@@ -1,0 +1,8 @@
+{
+  "env": {
+    "webextensions": true
+  },
+  "extends": [
+    "@egy186/eslint-config/browser"
+  ]
+}

@@ -11,7 +11,7 @@
     "eslint": "^4.18.2",
     "npm-run-all": "^4.0.2",
     "rimraf": "^2.6.1",
-    "web-ext": "^2.2.2"
+    "web-ext": "^2.5.0"
   },
   "engines": {
     "node": "^8.10.0"
@@ -25,13 +25,13 @@
     "url": "git+https://github.com/egy186/scroll-to-image.git"
   },
   "scripts": {
-    "build": "web-ext build --source-dir src",
+    "build": "web-ext build",
     "clean": "rimraf web-ext-artifacts",
     "lint": "run-p lint:*",
     "lint:js": "eslint .",
-    "lint:manifest": "web-ext lint --self-hosted --source-dir src",
-    "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET --source-dir src",
-    "start": "web-ext run --source-dir src",
+    "lint:manifest": "web-ext lint --self-hosted",
+    "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET",
+    "start": "web-ext run",
     "version": "node lib/version.js && git add docs/updates.json src/manifest.json"
   }
 }

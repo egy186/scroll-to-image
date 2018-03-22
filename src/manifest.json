@@ -9,18 +9,11 @@
       "update_url": "https://egy186.github.io/scroll-to-image/updates.json"
     }
   },
-  "content_scripts": [
-    {
-      "js": [
-        "index.js"
-      ],
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "run_at": "document_idle"
-    }
-  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
   "homepage_url": "https://github.com/egy186/scroll-to-image#readme",
   "icons": {
     "48": "icon.png",
@@ -33,6 +26,7 @@
   "permissions": [
     "<all_urls>",
     "activeTab",
-    "storage"
+    "storage",
+    "tabs"
   ]
 }

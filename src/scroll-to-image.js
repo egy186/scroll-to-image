@@ -41,7 +41,7 @@
    * Todo: make keybindings configurable
    */
   addEventListener('keydown', evt => {
-    if (evt.keyCode === 32) {
+    if (evt.code === 'Space') {
       evt.preventDefault();
       evt.stopPropagation();
       if (evt.shiftKey) {

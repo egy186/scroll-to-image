@@ -1,18 +1,6 @@
-(async () => {
-  'use strict';
+'use strict';
 
-  // Restore options
-  const {
-    list = [],
-    scrollAnimation = false,
-    scrollToFirst = false
-  } = await browser.storage.sync.get([
-    'list',
-    'scrollAnimation',
-    'scrollToFirst'
-  ]);
-
-  const { selector } = list.find(config => new RegExp(config.pattern).test(location.href)) || {};
+browser.runtime.onMessage.addListener(({ scrollAnimation, scrollToFirst, selector }) => {
   const images = Array.from(document.querySelectorAll(selector));
 
   let index = -1;
@@ -56,4 +44,4 @@
   if (scrollToFirst) {
     scroll('first');
   }
-})();
+});

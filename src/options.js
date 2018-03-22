@@ -1,6 +1,6 @@
-(() => {
-  'use strict';
+'use strict';
 
+(() => {
   const saveOptions = e => {
     e.preventDefault();
     const fitHeight = document.querySelector('#fit-height').checked;

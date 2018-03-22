@@ -1,11 +1,18 @@
-browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
-  'use strict';
+'use strict';
 
+browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
   // Restore options
   const {
     fitHeight = false,
-    list = []
-  } = await browser.storage.sync.get(['fitHeight', 'list']);
+    list = [],
+    scrollAnimation = false,
+    scrollToFirst = false
+  } = await browser.storage.sync.get([
+    'fitHeight',
+    'list',
+    'scrollAnimation',
+    'scrollToFirst'
+  ]);
   const { selector } = list.find(config => new RegExp(config.pattern).test(tab.url)) || {};
 
   if (selector) {
@@ -14,9 +21,14 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
       const css = `${selector} { max-height: 100vh; width: auto; }`;
       browser.tabs.insertCSS({ code: css });
     }
-    browser.tabs.executeScript({
+    await browser.tabs.executeScript({
       file: 'scroll-to-image.js',
       runAt: 'document_idle'
+    });
+    chrome.tabs.sendMessage(tab.id, {
+      scrollAnimation,
+      scrollToFirst,
+      selector
     });
   }
 });

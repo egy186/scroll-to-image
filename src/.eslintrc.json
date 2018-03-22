@@ -4,5 +4,11 @@
   },
   "extends": [
     "@egy186/eslint-config/browser"
-  ]
+  ],
+  "rules": {
+    "strict": [
+      "error",
+      "global"
+    ]
+  }
 }

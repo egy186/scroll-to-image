@@ -1,47 +1,59 @@
 'use strict';
 
-browser.runtime.onMessage.addListener(({ scrollAnimation, scrollToFirst, selector }) => {
-  const images = Array.from(document.querySelectorAll(selector));
-
-  let index = -1;
-  const behavior = scrollAnimation ? 'smooth' : 'instant';
-  const scroll = dest => {
-    switch (dest) {
-      case 'first':
-        index = 0;
-        break;
-      case 'next':
-        index = index === images.length - 1 ? 0 : index + 1;
-        break;
-      case 'prev':
-        index = index === 0 ? images.length - 1 : index - 1;
-        break;
-      default:
-    }
-    images[index].scrollIntoView({
+const Scroller = class {
+  constructor (elements = [], behavior = 'instant') {
+    this.elements = elements;
+    this.index = -1;
+    this.scrollIntoViewOptions = {
       behavior,
       block: 'start'
-    });
-  };
+    };
+  }
+
+  scrollToIndex (index) {
+    if (index >= this.elements.length) {
+      this.index = 0;
+    } else if (index < 0) {
+      this.index = this.elements.length - 1;
+    } else {
+      this.index = index;
+    }
+    this.elements[this.index].scrollIntoView(this.scrollIntoViewOptions);
+  }
+
+  scrollToNext () {
+    this.scrollToIndex(this.index + 1);
+  }
+
+  scrollToPrevious () {
+    this.scrollToIndex(this.index - 1);
+  }
+};
+
+browser.runtime.onMessage.addListener(({ scrollAnimation, scrollToFirst, selector }) => {
+  const images = Array.from(document.querySelectorAll(selector));
+  const behavior = scrollAnimation ? 'smooth' : 'instant';
+  const scroller = new Scroller(images, behavior);
 
   /*
    * Scroll on `Space` or `Shift+Space`
    * Todo: make keybindings configurable
    */
-  addEventListener('keydown', evt => {
-    if (evt.code === 'Space') {
-      evt.preventDefault();
-      evt.stopPropagation();
-      if (evt.shiftKey) {
-        scroll('prev');
+  const handleKeyDown = event => {
+    if (event.code === 'Space') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.shiftKey) {
+        scroller.scrollToPrevious();
       } else {
-        scroll('next');
+        scroller.scrollToNext();
       }
     }
-  }, false);
+  };
+  addEventListener('keydown', handleKeyDown, false);
 
   // Scroll to the first image
   if (scrollToFirst) {
-    scroll('first');
+    scroller.scrollToIndex(0);
   }
 });

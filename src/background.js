@@ -13,7 +13,7 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
     'scrollAnimation',
     'scrollToFirst'
   ]);
-  const { selector } = list.find(config => new RegExp(config.pattern).test(tab.url)) || {};
+  const { selector } = list.find(config => new RegExp(config.pattern, 'u').test(tab.url)) || {};
 
   if (selector) {
     if (fitHeight) {

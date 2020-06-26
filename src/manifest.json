@@ -5,7 +5,7 @@
   "applications": {
     "gecko": {
       "id": "{d85e84a8-8446-4496-8585-66ef63f6e556}",
-      "strict_min_version": "53.0",
+      "strict_min_version": "68.0",
       "update_url": "https://egy186.github.io/scroll-to-image/updates.json"
     }
   },

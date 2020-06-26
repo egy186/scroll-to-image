@@ -1,7 +1,25 @@
 {
   "extends": [
     "@egy186/eslint-config",
-    "@egy186/eslint-config/es2018",
     "@egy186/eslint-config/node"
+  ],
+  "overrides": [
+    {
+      "env": {
+        "webextensions": true
+      },
+      "extends": [
+        "@egy186/eslint-config/browser"
+      ],
+      "files": [
+        "src/**/*"
+      ],
+      "rules": {
+        "strict": [
+          "error",
+          "global"
+        ]
+      }
+    }
   ]
 }

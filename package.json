@@ -7,7 +7,7 @@
     "url": "https://github.com/egy186/scroll-to-image/issues"
   },
   "devDependencies": {
-    "@egy186/eslint-config": "^0.50.0",
+    "@egy186/eslint-config": "^0.51.0",
     "eslint": "^7.10.0",
     "eslint-plugin-jsdoc": "^30.6.0",
     "eslint-plugin-node": "^11.1.0",

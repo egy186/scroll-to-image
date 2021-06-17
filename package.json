@@ -15,7 +15,7 @@
     "web-ext": "^6.1.0"
   },
   "engines": {
-    "node": ">=14.17.0"
+    "node": ">=16.3.0"
   },
   "homepage": "https://github.com/egy186/scroll-to-image#readme",
   "license": "MIT",

@@ -25,7 +25,7 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
       file: 'scroll-to-image.js',
       runAt: 'document_idle'
     });
-    chrome.tabs.sendMessage(tab.id, {
+    browser.tabs.sendMessage(tab.id, {
       scrollAnimation,
       scrollToFirst,
       selector

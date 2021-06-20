@@ -1,18 +1,13 @@
-'use strict';
+import { initialOptions } from './constant';
 
 browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
   // Restore options
   const {
-    fitHeight = false,
-    list = [],
-    scrollAnimation = false,
-    scrollToFirst = false
-  } = await browser.storage.sync.get([
-    'fitHeight',
-    'list',
-    'scrollAnimation',
-    'scrollToFirst'
-  ]);
+    fitHeight,
+    list,
+    scrollAnimation,
+    scrollToFirst
+  } = await browser.storage.sync.get(initialOptions);
   const { selector } = list.find(config => new RegExp(config.pattern, 'u').test(tab.url)) || {};
 
   if (selector) {

@@ -1,5 +1,5 @@
 'use strict';
 
-const config = { sourceDir: 'src' };
+const config = { sourceDir: 'dist' };
 
 module.exports = config;

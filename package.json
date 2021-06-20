@@ -7,12 +7,28 @@
     "url": "https://github.com/egy186/scroll-to-image/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-react": "^7.14.5",
     "@egy186/eslint-config": "^0.61.0",
+    "@material-table/core": "^3.0.7",
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^9.0.0",
     "eslint": "^7.28.0",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.1",
     "npm-run-all": "^4.1.5",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
-    "web-ext": "^6.1.0"
+    "web-ext": "^6.1.0",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2"
   },
   "engines": {
     "node": ">=16.3.0"
@@ -26,11 +42,14 @@
     "url": "git+https://github.com/egy186/scroll-to-image.git"
   },
   "scripts": {
-    "build": "web-ext build",
-    "clean": "rimraf web-ext-artifacts",
+    "build": "webpack",
+    "clean": "rimraf dist web-ext-artifacts",
     "lint": "run-p lint:*",
     "lint:js": "eslint .",
     "lint:manifest": "web-ext lint --self-hosted",
+    "prelint:manifest": "npm run build",
+    "prerelease": "npm run build",
+    "prestart": "npm run build",
     "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET",
     "start": "web-ext run",
     "version": "node lib/version.js && git add docs/updates.json src/manifest.json"

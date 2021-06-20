@@ -3,22 +3,36 @@
     "@egy186/eslint-config",
     "@egy186/eslint-config/node"
   ],
+  "ignorePatterns": [
+    "dist"
+  ],
   "overrides": [
     {
       "env": {
         "webextensions": true
       },
       "extends": [
-        "@egy186/eslint-config/browser"
+        "@egy186/eslint-config/browser",
+        "@egy186/eslint-config/modules",
+        "@egy186/eslint-config/react"
       ],
       "files": [
-        "src/**/*"
+        "./src/**/*.js",
+        "./src/**/*.jsx"
       ],
       "rules": {
-        "strict": [
-          "error",
-          "global"
-        ]
+        "react/jsx-max-depth": "off",
+        "react/react-in-jsx-scope": "off"
+      },
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [
+              ".js",
+              ".jsx"
+            ]
+          }
+        }
       }
     }
   ]

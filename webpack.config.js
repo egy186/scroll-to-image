@@ -35,6 +35,21 @@ const config = {
           from: '**/*'
         }
       ]
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          context: './src',
+          from: './manifest.json',
+          transform: manifest => {
+            const manifestTemplate = JSON.parse(manifest.toString());
+            return JSON.stringify({
+              ...manifestTemplate,
+              version: pkg.version
+            });
+          }
+        }
+      ]
     })
   ],
   resolve: { extensions: ['.js', '.jsx'] }

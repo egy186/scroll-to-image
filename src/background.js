@@ -15,7 +15,7 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
       if (fitHeight) {
         // Append style element
         const css = `${selector} { max-height: 100vh; width: auto; }`;
-        browser.tabs.insertCSS({ code: css });
+        browser.tabs.insertCSS(tab.id, { code: css });
       }
       await browser.tabs.executeScript(tab.id, {
         file: 'scroll-to-image.js',

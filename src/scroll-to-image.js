@@ -44,7 +44,7 @@ browser.runtime.onMessage.addListener(({ command, kind, scrollAnimation, scrollT
       scroller.init(images, behavior);
 
       // Scroll to the first image
-      if (scrollToFirst) {
+      if (scrollToFirst && window.scrollY === 0 && window.scrollX === 0) {
         scroller.scrollToIndex(0);
       }
       break;

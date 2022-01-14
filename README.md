@@ -4,5 +4,5 @@
 
 Scroll to the next image.
 
-- `Space`: move to the next image
-- `Shift + Space`: move to the previous image
+- `Ctrl+Space`: scroll to the next image
+- `Ctrl+Shift+Space`: scroll to the previous image

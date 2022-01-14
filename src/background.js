@@ -21,10 +21,25 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
         file: 'scroll-to-image.js',
         runAt: 'document_idle'
       });
+
       browser.tabs.sendMessage(tab.id, {
+        kind: 'init',
         scrollAnimation,
         scrollToFirst,
         selector
+      });
+
+      browser.commands.onCommand.addListener(command => {
+        switch (command) {
+          case 'scroll-to-next':
+          case 'scroll-to-previous':
+            browser.tabs.sendMessage(tab.id, {
+              command,
+              kind: 'command'
+            });
+            break;
+          default:
+        }
       });
     }
   }

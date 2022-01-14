@@ -14,6 +14,20 @@
       "background.js"
     ]
   },
+  "commands": {
+    "scroll-to-next": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "Scroll to the next image"
+    },
+    "scroll-to-previous": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Scroll to the previous image"
+    }
+  },
   "homepage_url": "https://github.com/egy186/scroll-to-image#readme",
   "icons": {
     "48": "icon.png",

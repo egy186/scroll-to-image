@@ -2,6 +2,10 @@
 
 const Scroller = class {
   constructor (elements = [], behavior = 'instant') {
+    this.init(elements, behavior);
+  }
+
+  init (elements, behavior) {
     this.elements = elements;
     this.index = -1;
     this.scrollIntoViewOptions = {
@@ -30,30 +34,32 @@ const Scroller = class {
   }
 };
 
-browser.runtime.onMessage.addListener(({ scrollAnimation, scrollToFirst, selector }) => {
-  const images = Array.from(document.querySelectorAll(selector));
-  const behavior = scrollAnimation ? 'smooth' : 'instant';
-  const scroller = new Scroller(images, behavior);
+const scroller = new Scroller();
 
-  /*
-   * Scroll on `Space` or `Shift+Space`
-   * Todo: make keybindings configurable
-   */
-  const handleKeyDown = event => {
-    if (event.code === 'Space') {
-      event.preventDefault();
-      event.stopPropagation();
-      if (event.shiftKey) {
-        scroller.scrollToPrevious();
-      } else {
-        scroller.scrollToNext();
+browser.runtime.onMessage.addListener(({ command, kind, scrollAnimation, scrollToFirst, selector }) => {
+  switch (kind) {
+    case 'init': {
+      const images = Array.from(document.querySelectorAll(selector));
+      const behavior = scrollAnimation ? 'smooth' : 'instant';
+      scroller.init(images, behavior);
+
+      // Scroll to the first image
+      if (scrollToFirst) {
+        scroller.scrollToIndex(0);
       }
+      break;
     }
-  };
-  addEventListener('keydown', handleKeyDown, false);
-
-  // Scroll to the first image
-  if (scrollToFirst) {
-    scroller.scrollToIndex(0);
+    case 'command':
+      switch (command) {
+        case 'scroll-to-next':
+          scroller.scrollToNext();
+          break;
+        case 'scroll-to-previous':
+          scroller.scrollToPrevious();
+          break;
+        default:
+      }
+      break;
+    default:
   }
 });

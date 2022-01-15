@@ -28,20 +28,26 @@ browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
         scrollToFirst,
         selector
       });
-
-      browser.commands.onCommand.addListener(command => {
-        switch (command) {
-          case 'scroll-to-next':
-          case 'scroll-to-previous':
-            browser.tabs.sendMessage(tab.id, {
-              command,
-              kind: 'command'
-            });
-            break;
-          default:
-        }
-      });
     }
   }
 });
 
+browser.commands.onCommand.addListener(async command => {
+  const tabs = await browser.tabs.query({
+    active: true,
+    currentWindow: true
+  });
+
+  tabs.forEach(tab => {
+    switch (command) {
+      case 'scroll-to-next':
+      case 'scroll-to-previous':
+        browser.tabs.sendMessage(tab.id, {
+          command,
+          kind: 'command'
+        });
+        break;
+      default:
+    }
+  });
+});

@@ -9,7 +9,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
-    "@egy186/eslint-config": "^0.67.0",
+    "@egy186/eslint-config": "^0.70.0",
     "@material-table/core": "^4.3.18",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",

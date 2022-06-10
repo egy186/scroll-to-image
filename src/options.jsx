@@ -100,7 +100,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {loading && <LinearProgress classes={{ root: classes.progressBar }} />}
+      {loading ? <LinearProgress classes={{ root: classes.progressBar }} /> : null}
       <AppBar position="static">
         <Toolbar>
           <Typography
@@ -127,21 +127,23 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <Container classes={{ root: classes.root }}>
-        {error && (
-          <Paper classes={{ root: classes.paper }}>
-            <Typography
-              color="error"
-              component="h2"
-              gutterBottom
-              variant="h5"
-            >
-              {'Error'}
-            </Typography>
-            <Typography color="error">
-              {String(error)}
-            </Typography>
-          </Paper>
-        )}
+        {error
+          ? (
+            <Paper classes={{ root: classes.paper }}>
+              <Typography
+                color="error"
+                component="h2"
+                gutterBottom
+                variant="h5"
+              >
+                {'Error'}
+              </Typography>
+              <Typography color="error">
+                {String(error)}
+              </Typography>
+            </Paper>
+          )
+          : null}
         <FormControl>
           {[
             {

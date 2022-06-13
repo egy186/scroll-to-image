@@ -11,7 +11,7 @@
     "@babel/preset-react": "^7.17.12",
     "@egy186/eslint-config": "^0.75.1",
     "@material-table/core": "^4.3.18",
-    "@material-ui/core": "^4.12.3",
+    "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.2",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^11.0.0",

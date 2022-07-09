@@ -1,4 +1,4 @@
-import { FormControlLabel, Checkbox as MUICheckbox } from '@material-ui/core';
+import { FormControlLabel, Checkbox as MUICheckbox } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/no-multi-comp */
 
-import { AddBox, ArrowDownward, Check, ChevronLeft, ChevronRight, Clear, Delete, Edit, FirstPage, LastPage, Remove, Search } from '@material-ui/icons';
+import { AddBox, ArrowDownward, Check, ChevronLeft, ChevronRight, Clear, Delete, Edit, FirstPage, LastPage, Remove, Search } from '@mui/icons-material';
 import { forwardRef } from 'react';
 
 const tableIcons = {

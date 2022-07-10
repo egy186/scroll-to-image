@@ -4,7 +4,7 @@ import { AppBar } from './components/AppBar';
 import { Checkbox } from './components/Checkbox';
 import MaterialTable from '@material-table/core';
 import { ProgressBar } from './components/ProgressBar';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { initialOptions } from './constant';
 import { tableIcons } from './components/tableIcons';
 import { useStorage } from './hooks/use-storage';
@@ -129,4 +129,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.querySelector('#app-container'));
+const root = createRoot(document.querySelector('#app-container'));
+
+root.render(<App />);

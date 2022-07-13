@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.9.3",
     "@material-table/core": "^0.2.35",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
+    "@mui/material": "^5.9.0",
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.19.0",

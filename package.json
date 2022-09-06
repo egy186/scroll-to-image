@@ -7,11 +7,11 @@
     "url": "https://github.com/egy186/scroll-to-image/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.6",
+    "@babel/core": "^7.19.0",
     "@babel/preset-react": "^7.18.6",
     "@egy186/eslint-config": "^0.78.0",
     "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/styled": "^11.10.4",
     "@material-table/core": "^0.2.35",
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.0",

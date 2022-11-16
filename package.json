@@ -28,7 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.0",
-    "web-ext": "^7.2.0",
+    "web-ext": "^7.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
@@ -53,7 +53,7 @@
     "prerelease": "npm run build",
     "prestart": "npm run build",
     "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET",
-    "start": "web-ext run",
+    "start": "web-ext run --devtools",
     "version": "node lib/version.js && git add docs/updates.json src/manifest.json"
   }
 }

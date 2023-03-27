@@ -12,7 +12,7 @@
     "@egy186/eslint-config": "^0.85.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "@material-table/core": "^6.1.10",
+    "@material-table/core": "^6.1.14",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.0",
     "babel-loader": "^9.1.0",

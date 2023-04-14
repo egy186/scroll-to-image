@@ -1,7 +1,9 @@
 'use strict';
 
-const CopyPlugin = require('copy-webpack-plugin'); // eslint-disable-line node/no-unpublished-require
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line node/no-unpublished-require
+// eslint-disable-next-line n/no-unpublished-require
+const CopyPlugin = require('copy-webpack-plugin');
+// eslint-disable-next-line n/no-unpublished-require
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pkg = require('./package.json');
 
 const config = {

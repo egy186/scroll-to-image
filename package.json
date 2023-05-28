@@ -27,7 +27,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rimraf": "^4.3.1",
+    "rimraf": "^5.0.1",
     "web-ext": "^7.5.0",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1"

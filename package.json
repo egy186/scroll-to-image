@@ -9,7 +9,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-react": "^7.23.3",
-    "@egy186/eslint-config": "^0.99.1",
+    "@egy186/eslint-config": "^0.100.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@material-table/core": "^6.3.0",

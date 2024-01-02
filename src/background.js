@@ -1,4 +1,4 @@
-import { initialOptions } from './constant';
+import { initialOptions } from './constant.js';
 
 browser.tabs.onUpdated.addListener(async (id, changeInfo, tab) => {
   if (changeInfo.status === 'complete') {

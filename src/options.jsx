@@ -1,13 +1,13 @@
 import { Container, CssBaseline, FormControl, Paper, StyledEngineProvider, TableContainer, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
 import { useCallback, useMemo } from 'react';
-import { AppBar } from './components/AppBar';
-import { Checkbox } from './components/Checkbox';
+import { AppBar } from './components/AppBar.jsx';
+import { Checkbox } from './components/Checkbox.jsx';
 import MaterialTable from '@material-table/core';
-import { ProgressBar } from './components/ProgressBar';
+import { ProgressBar } from './components/ProgressBar.jsx';
 import { createRoot } from 'react-dom/client';
-import { initialOptions } from './constant';
-import { tableIcons } from './components/tableIcons';
-import { useStorage } from './hooks/use-storage';
+import { initialOptions } from './constant.js';
+import { tableIcons } from './components/tableIcons.jsx';
+import { useStorage } from './hooks/use-storage.js';
 
 const columns = [
   {

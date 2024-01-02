@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, AppBar as MUIAppBar, Toolbar, Typography } from '@mui/material';
 import { useCallback, useRef } from 'react';
-import { initialOptions } from '../constant';
-import { useStorage } from '../hooks/use-storage';
+import { initialOptions } from '../constant.js';
+import { useStorage } from '../hooks/use-storage.js';
 
 // eslint-disable-next-line max-lines-per-function
 const AppBar = () => {

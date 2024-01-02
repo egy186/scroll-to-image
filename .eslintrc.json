@@ -1,7 +1,6 @@
 {
   "extends": [
-    "@egy186/eslint-config",
-    "@egy186/eslint-config/node"
+    "@egy186/eslint-config"
   ],
   "ignorePatterns": [
     "dist"
@@ -13,27 +12,34 @@
       },
       "extends": [
         "@egy186/eslint-config/browser",
-        "@egy186/eslint-config/modules",
         "@egy186/eslint-config/react"
       ],
       "files": [
-        "./src/**/*.js",
-        "./src/**/*.jsx"
+        "src/**/*.js",
+        "src/**/*.jsx"
       ],
       "rules": {
+        "import/extensions": [
+          "error",
+          "always",
+          {
+            "ignorePackages": true
+          }
+        ],
         "react/jsx-max-depth": "off",
         "react/react-in-jsx-scope": "off"
-      },
-      "settings": {
-        "import/resolver": {
-          "node": {
-            "extensions": [
-              ".js",
-              ".jsx"
-            ]
-          }
-        }
       }
+    },
+    {
+      "extends": [
+        "@egy186/eslint-config/commonjs"
+      ],
+      "files": [
+        "lib/**/*.js",
+        "babel.config.js",
+        "web-ext-config.js",
+        "webpack.config.js"
+      ]
     }
   ]
 }

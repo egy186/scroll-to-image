@@ -50,7 +50,7 @@
     "prelint:manifest": "npm run build",
     "prerelease": "npm run build",
     "prestart": "npm run build",
-    "release": "web-ext sign --api-key $API_KEY --api-secret $API_SECRET",
+    "release": "web-ext sign --channel unlisted --api-key $API_KEY --api-secret $API_SECRET",
     "start": "web-ext run --devtools",
     "version": "node lib/version.js && git add docs/updates.json src/manifest.json"
   }

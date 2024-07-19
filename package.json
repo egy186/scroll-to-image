@@ -53,5 +53,6 @@
     "release": "web-ext sign --channel unlisted --api-key $API_KEY --api-secret $API_SECRET",
     "start": "web-ext run --devtools",
     "version": "node lib/version.js && git add docs/updates.json src/manifest.json"
-  }
+  },
+  "type": "module"
 }

@@ -29,17 +29,6 @@
         "react/jsx-max-depth": "off",
         "react/react-in-jsx-scope": "off"
       }
-    },
-    {
-      "extends": [
-        "@egy186/eslint-config/commonjs"
-      ],
-      "files": [
-        "lib/**/*.js",
-        "babel.config.js",
-        "web-ext-config.js",
-        "webpack.config.js"
-      ]
     }
   ]
 }

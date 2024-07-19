@@ -1,8 +1,9 @@
-'use strict';
+// eslint-disable-next-line import/default
+import CopyPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { readFile } from 'node:fs/promises';
 
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const pkg = require('./package.json');
+const { name, version } = JSON.parse(await readFile(new URL('./package.json', import.meta.url), 'utf8'));
 
 const config = {
   entry: {
@@ -26,7 +27,7 @@ const config = {
       meta: { viewport: 'width=device-width,initial-scale=1' },
       scriptLoading: 'defer',
       template: './src/index.ejs',
-      title: `${pkg.name} options`
+      title: `${name} options`
     }),
     new CopyPlugin({
       patterns: [
@@ -45,7 +46,7 @@ const config = {
             const manifestTemplate = JSON.parse(manifest.toString());
             return JSON.stringify({
               ...manifestTemplate,
-              version: pkg.version
+              version
             });
           }
         }
@@ -54,4 +55,4 @@ const config = {
   ]
 };
 
-module.exports = config;
+export default config;

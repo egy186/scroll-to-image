@@ -11,7 +11,7 @@
     "@babel/preset-react": "^7.26.3",
     "@egy186/eslint-config": "^2.3.0",
     "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
+    "@emotion/styled": "^11.14.0",
     "@material-table/core": "^6.4.1",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",

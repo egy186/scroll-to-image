@@ -1,16 +1,14 @@
-import type { ScrollToImageOptions } from './constant.js';
-import { initialOptions } from './constant.js';
+import { restoreOptions } from './storage.js';
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/prefer-readonly-parameter-types
 browser.tabs.onUpdated.addListener(async (_id, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && typeof tab.id === 'number') {
-    // Restore options
     const {
       fitHeight,
       list,
       scrollAnimation,
       scrollToFirst
-    } = await browser.storage.sync.get(initialOptions) as ScrollToImageOptions;
+    } = await restoreOptions();
     const { selector } = list.find(config => new RegExp(config.pattern, 'u').test(tab.url ?? '')) ?? {};
 
     if (typeof selector === 'string') {

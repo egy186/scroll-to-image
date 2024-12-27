@@ -1,16 +1,17 @@
 import { Container, CssBaseline, FormControl, Paper, StyledEngineProvider, TableContainer, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
-import type { ScrollToImageOptions, ScrollToImagePattern } from './constant.js';
 import { useCallback, useMemo } from 'react';
 import { AppBar } from './components/AppBar.js';
 import { Checkbox } from './components/Checkbox.js';
 import type { Column } from '@material-table/core';
 import type { JSX } from 'react';
 import MaterialTable from '@material-table/core';
+import type { Options } from './storage.js';
 import { ProgressBar } from './components/ProgressBar.js';
 import { createRoot } from 'react-dom/client';
-import { initialOptions } from './constant.js';
 import { tableIcons } from './components/tableIcons.js';
-import { useStorage } from './hooks/use-storage.js';
+import { useOptions } from './hooks/use-options.js';
+
+type OptionsListItem = Options['list'][number];
 
 const columns = [
   {
@@ -23,26 +24,26 @@ const columns = [
     title: 'CSS Selector',
     type: 'string'
   }
-] as const satisfies readonly Column<ScrollToImagePattern>[];
+] as const satisfies readonly Column<OptionsListItem>[];
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const App = (): JSX.Element => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = useMemo(() => createTheme({ palette: { mode: prefersDarkMode ? 'dark' : 'light' } }), [prefersDarkMode]);
 
-  const [options, { error, loading, set }] = useStorage(initialOptions);
+  const [options, { error, loading, set }] = useOptions();
 
-  const onRowAdd = useCallback(async (newItem: ScrollToImagePattern) => {
+  const onRowAdd = useCallback(async (newItem: OptionsListItem) => {
     const list = [...options.list, newItem];
     await set({ list });
   }, [options.list, set]);
 
-  const onRowDelete = useCallback(async (oldItem: ScrollToImagePattern) => {
+  const onRowDelete = useCallback(async (oldItem: OptionsListItem) => {
     const list = options.list.filter(item => item.pattern !== oldItem.pattern);
     await set({ list });
   }, [options.list, set]);
 
-  const onRowUpdate = useCallback(async (newItem: ScrollToImagePattern, oldItem: ScrollToImagePattern) => {
+  const onRowUpdate = useCallback(async (newItem: OptionsListItem, oldItem: OptionsListItem) => {
     const index = options.list.findIndex(item => item.pattern === oldItem.pattern);
     const list = [
       ...options.list.slice(0, index),
@@ -52,7 +53,7 @@ const App = (): JSX.Element => {
     await set({ list });
   }, [options.list, set]);
 
-  const handleChange = useCallback((name: keyof ScrollToImageOptions) => async (value: ScrollToImageOptions[keyof ScrollToImageOptions]): Promise<void> => {
+  const handleChange = useCallback((name: keyof Options) => async (value: Options[keyof Options]): Promise<void> => {
     await set({ [name]: value });
   }, [set]);
 

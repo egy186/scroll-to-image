@@ -2,29 +2,14 @@ import { Container, CssBaseline, FormControl, Paper, StyledEngineProvider, Table
 import { useCallback, useMemo } from 'react';
 import { AppBar } from './components/AppBar.js';
 import { Checkbox } from './components/Checkbox.js';
-import type { Column } from '@material-table/core';
+import { DataGrid } from './components/DataGrid.js';
 import type { JSX } from 'react';
-import MaterialTable from '@material-table/core';
 import type { Options } from './storage.js';
 import { ProgressBar } from './components/ProgressBar.js';
 import { createRoot } from 'react-dom/client';
-import { tableIcons } from './components/tableIcons.js';
 import { useOptions } from './hooks/use-options.js';
 
 type OptionsListItem = Options['list'][number];
-
-const columns = [
-  {
-    field: 'pattern',
-    title: 'URL (regex)',
-    type: 'string'
-  },
-  {
-    field: 'selector',
-    title: 'CSS Selector',
-    type: 'string'
-  }
-] as const satisfies readonly Column<OptionsListItem>[];
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const App = (): JSX.Element => {
@@ -33,28 +18,12 @@ const App = (): JSX.Element => {
 
   const [options, { error, loading, set }] = useOptions();
 
-  const onRowAdd = useCallback(async (newItem: OptionsListItem) => {
-    const list = [...options.list, newItem];
-    await set({ list });
-  }, [options.list, set]);
-
-  const onRowDelete = useCallback(async (oldItem: OptionsListItem) => {
-    const list = options.list.filter(item => item.pattern !== oldItem.pattern);
-    await set({ list });
-  }, [options.list, set]);
-
-  const onRowUpdate = useCallback(async (newItem: OptionsListItem, oldItem: OptionsListItem) => {
-    const index = options.list.findIndex(item => item.pattern === oldItem.pattern);
-    const list = [
-      ...options.list.slice(0, index),
-      newItem,
-      ...options.list.slice(index + 1, options.list.length)
-    ];
-    await set({ list });
-  }, [options.list, set]);
-
   const handleChange = useCallback((name: keyof Options) => async (value: Options[keyof Options]): Promise<void> => {
     await set({ [name]: value });
+  }, [set]);
+
+  const handlePersistRows = useCallback(async (list: readonly OptionsListItem[]) => {
+    await set({ list });
   }, [set]);
 
   return (
@@ -110,23 +79,9 @@ const App = (): JSX.Element => {
             </FormControl>
           </Paper>
           <TableContainer component={Paper}>
-            {/* @ts-expect-error TS2786 */}
-            <MaterialTable
-              columns={columns}
-              data={options.list}
-              editable={{
-                onRowAdd,
-                onRowDelete,
-                onRowUpdate
-              }}
-              icons={tableIcons}
-              isLoading={loading || error !== null}
-              options={{
-                addRowPosition: 'first',
-                draggable: false,
-                headerStyle: { backgroundColor: 'inherit' }
-              }}
-              title="Patterns"
+            <DataGrid
+              onPersistRows={handlePersistRows}
+              rows={options.list}
             />
           </TableContainer>
         </Container>

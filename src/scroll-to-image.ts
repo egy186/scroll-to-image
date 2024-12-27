@@ -1,4 +1,4 @@
-import type { ScrollToImageMessage } from './constant.js';
+import type { Message } from './message.js';
 
 class Scroller {
   #elements: readonly Element[] = [];
@@ -47,7 +47,7 @@ class Scroller {
 
 const scroller = new Scroller();
 
-browser.runtime.onMessage.addListener((message: ScrollToImageMessage) => {
+browser.runtime.onMessage.addListener((message: Message) => {
   switch (message.kind) {
     case 'init': {
       const images = Array.from(document.querySelectorAll(message.selector));

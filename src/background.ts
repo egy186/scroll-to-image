@@ -1,3 +1,4 @@
+import type { CommandMessage, InitMessage } from './message.js';
 import { restoreOptions } from './storage.js';
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/prefer-readonly-parameter-types
@@ -27,7 +28,7 @@ browser.tabs.onUpdated.addListener(async (_id, changeInfo, tab) => {
         scrollAnimation,
         scrollToFirst,
         selector
-      });
+      } satisfies InitMessage);
     }
   }
 });
@@ -49,7 +50,7 @@ browser.commands.onCommand.addListener(async command => {
           void browser.tabs.sendMessage(tab.id, {
             command,
             kind: 'command'
-          });
+          } satisfies CommandMessage);
         }
         break;
       default:

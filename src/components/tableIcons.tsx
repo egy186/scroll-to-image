@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
 /* eslint-disable react/display-name */
 /* eslint-disable react/no-multi-comp */
 
@@ -5,84 +7,84 @@ import { AddBox, ArrowDownward, Check, ChevronLeft, ChevronRight, Clear, Delete,
 import { forwardRef } from 'react';
 
 const tableIcons = {
-  Add: forwardRef((props, ref) => (
+  Add: forwardRef<SVGSVGElement | null>((props, ref) => (
     <AddBox
       color="primary"
       {...props}
       ref={ref}
     />
   )),
-  Check: forwardRef((props, ref) => (
+  Check: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Check
       {...props}
       ref={ref}
     />
   )),
-  Clear: forwardRef((props, ref) => (
+  Clear: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Clear
       {...props}
       ref={ref}
     />
   )),
-  Delete: forwardRef((props, ref) => (
+  Delete: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Delete
       {...props}
       color="secondary"
       ref={ref}
     />
   )),
-  Edit: forwardRef((props, ref) => (
+  Edit: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Edit
       color="primary"
       {...props}
       ref={ref}
     />
   )),
-  FirstPage: forwardRef((props, ref) => (
+  FirstPage: forwardRef<SVGSVGElement | null>((props, ref) => (
     <FirstPage
       {...props}
       ref={ref}
     />
   )),
-  LastPage: forwardRef((props, ref) => (
+  LastPage: forwardRef<SVGSVGElement | null>((props, ref) => (
     <LastPage
       {...props}
       ref={ref}
     />
   )),
 
-  NextPage: forwardRef((props, ref) => (
+  NextPage: forwardRef<SVGSVGElement | null>((props, ref) => (
     <ChevronRight
       {...props}
       ref={ref}
     />
   )),
 
-  PreviousPage: forwardRef((props, ref) => (
+  PreviousPage: forwardRef<SVGSVGElement | null>((props, ref) => (
     <ChevronLeft
       {...props}
       ref={ref}
     />
   )),
-  ResetSearch: forwardRef((props, ref) => (
+  ResetSearch: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Clear
       {...props}
       ref={ref}
     />
   )),
-  Search: forwardRef((props, ref) => (
+  Search: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Search
       {...props}
       ref={ref}
     />
   )),
-  SortArrow: forwardRef((props, ref) => (
+  SortArrow: forwardRef<SVGSVGElement | null>((props, ref) => (
     <ArrowDownward
       {...props}
       ref={ref}
     />
   )),
-  ThirdStateCheck: forwardRef((props, ref) => (
+  ThirdStateCheck: forwardRef<SVGSVGElement | null>((props, ref) => (
     <Remove
       {...props}
       ref={ref}

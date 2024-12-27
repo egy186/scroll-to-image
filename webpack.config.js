@@ -7,9 +7,9 @@ const { name, version } = JSON.parse(await readFile(new URL('./package.json', im
 
 const config = {
   entry: {
-    background: './src/background.js',
-    options: './src/options.jsx',
-    'scroll-to-image': './src/scroll-to-image.js'
+    background: './src/background.ts',
+    options: './src/options.tsx',
+    'scroll-to-image': './src/scroll-to-image.ts'
   },
   mode: 'production',
   module: {
@@ -17,7 +17,12 @@ const config = {
       {
         exclude: /node_modules/u,
         loader: 'babel-loader',
-        test: /\.(?:js|jsx)$/u
+        test: /\.(?:js|jsx|ts|tsx)$/u
+      },
+      {
+        exclude: /node_modules/u,
+        loader: 'ts-loader',
+        test: /\.(?:ts|tsx)$/u
       }
     ]
   },
@@ -52,7 +57,22 @@ const config = {
         }
       ]
     })
-  ]
+  ],
+  resolve: {
+    extensionAlias: {
+      '.js': [
+        '.js',
+        '.ts',
+        '.tsx'
+      ]
+    },
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx'
+    ]
+  }
 };
 
 export default config;

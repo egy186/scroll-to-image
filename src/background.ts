@@ -1,0 +1,60 @@
+import type { ScrollToImageOptions } from './constant.js';
+import { initialOptions } from './constant.js';
+
+// eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/prefer-readonly-parameter-types
+browser.tabs.onUpdated.addListener(async (_id, changeInfo, tab) => {
+  if (changeInfo.status === 'complete' && typeof tab.id === 'number') {
+    // Restore options
+    const {
+      fitHeight,
+      list,
+      scrollAnimation,
+      scrollToFirst
+    } = await browser.storage.sync.get(initialOptions) as ScrollToImageOptions;
+    const { selector } = list.find(config => new RegExp(config.pattern, 'u').test(tab.url ?? '')) ?? {};
+
+    if (typeof selector === 'string') {
+      if (fitHeight) {
+        // Append style element
+        const css = `${selector} { max-height: 100vh; width: auto; }`;
+        await browser.tabs.insertCSS(tab.id, { code: css });
+      }
+      await browser.tabs.executeScript(tab.id, {
+        file: 'scroll-to-image.js',
+        runAt: 'document_idle'
+      });
+
+      await browser.tabs.sendMessage(tab.id, {
+        kind: 'init',
+        scrollAnimation,
+        scrollToFirst,
+        selector
+      });
+    }
+  }
+});
+
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+browser.commands.onCommand.addListener(async command => {
+  const tabs = await browser.tabs.query({
+    active: true,
+    currentWindow: true
+  });
+
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+  tabs.forEach(tab => {
+    switch (command) {
+      case 'scroll-to-next':
+      case 'scroll-to-previous':
+        if (typeof tab.id === 'number') {
+          // eslint-disable-next-line no-void
+          void browser.tabs.sendMessage(tab.id, {
+            command,
+            kind: 'command'
+          });
+        }
+        break;
+      default:
+    }
+  });
+});

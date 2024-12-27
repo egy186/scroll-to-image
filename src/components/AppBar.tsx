@@ -1,19 +1,21 @@
 import { Button, ButtonGroup, AppBar as MUIAppBar, Toolbar, Typography } from '@mui/material';
 import { useCallback, useRef } from 'react';
+import type { JSX } from 'react';
+import type { ScrollToImageOptions } from '../constant.js';
 import { initialOptions } from '../constant.js';
 import { useStorage } from '../hooks/use-storage.js';
 
-// eslint-disable-next-line max-lines-per-function
-const AppBar = () => {
+// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
+const AppBar = (): JSX.Element => {
   const [options, { set }] = useStorage(initialOptions);
 
-  const inputFile = useRef(null);
+  const inputFile = useRef<HTMLInputElement>(null);
   const handleImportClick = useCallback(() => {
-    inputFile.current.click();
+    inputFile.current?.click();
   }, []);
   const handleImport = useCallback(async () => {
-    const text = await inputFile.current.files[0].text();
-    await set(JSON.parse(text));
+    const text = await inputFile.current?.files?.[0]?.text() ?? '{}';
+    await set(JSON.parse(text) as ScrollToImageOptions);
   }, [set]);
 
   const handleExport = useCallback(() => {
@@ -43,6 +45,7 @@ const AppBar = () => {
           </Button>
           <input
             hidden
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onChange={handleImport}
             ref={inputFile}
             type="file"

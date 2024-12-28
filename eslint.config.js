@@ -3,7 +3,7 @@ import globals from 'globals';
 // eslint-disable-next-line import/no-unresolved
 import { react } from '@egy186/eslint-config/react';
 // eslint-disable-next-line import/no-unresolved
-import { typescriptConfig } from '@egy186/eslint-config/typescript';
+import { typescript } from '@egy186/eslint-config/typescript';
 
 const config = [
   { ignores: ['dist'] },
@@ -29,7 +29,7 @@ const config = [
       'react/react-in-jsx-scope': 'off'
     }
   },
-  typescriptConfig({ projectService: { allowDefaultProject: ['*.{ts,js}', 'lib/*.ts'] } })
+  typescript
 ];
 
 export default config;

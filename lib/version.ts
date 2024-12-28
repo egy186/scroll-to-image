@@ -28,7 +28,7 @@ const updateManifest = JSON.parse(await readFile(updateManifestFile, 'utf8')) as
     };
   };
 };
-updateManifest.addons[manifest.browser_specific_settings.gecko.id].updates.push({
+updateManifest.addons[manifest.browser_specific_settings.gecko.id]?.updates.push({
   update_link: `https://github.com/egy186/scroll-to-image/releases/download/v${version}/scroll_to_image-${version}.xpi`,
   version
 });

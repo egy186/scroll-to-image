@@ -12,6 +12,7 @@
       "ES2023"
     ],
     "module": "Node16",
+    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -23,8 +24,7 @@
     "strict": true,
     "target": "ES2022"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
+  "exclude": [
+    "dist"
   ]
 }

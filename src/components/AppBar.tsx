@@ -35,7 +35,7 @@ const AppBar = (): JSX.Element => {
           sx={{ flexGrow: 1 }}
           variant="h6"
         >
-          {'Options'}
+          {'Scroll to Image Options'}
         </Typography>
         <ButtonGroup color="inherit">
           <Button onClick={handleImportClick}>

@@ -2,9 +2,11 @@ import { Close, Delete, Edit, Save } from '@mui/icons-material';
 import { GridActionsCellItem, GridRowEditStopReasons, GridRowModes, DataGrid as MUIXDataGrid } from '@mui/x-data-grid';
 import type { GridActionsCellItemProps, GridColDef, GridEventListener, GridRowId, GridRowModel, GridRowModesModel, GridRowsProp } from '@mui/x-data-grid';
 import type { JSX, ReactElement } from 'react';
+import { Paper, TableContainer } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DataGridToolbar } from './DataGridToolbar.js';
 import type { Options } from '../storage.js';
+import { useOptions } from '../hooks/use-options.js';
 
 type OptionsListItem = Options['list'][number];
 
@@ -25,18 +27,19 @@ const columns = [
   }
 ] as const satisfies GridColDef<GridRowModel<OptionsListItem>, string>[];
 
-interface DataGridProps {
-  readonly rows: GridRowsProp<OptionsListItem>;
-  readonly onPersistRows: (rows: readonly OptionsListItem[]) => void | Promise<void>;
-}
-
 // eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function, max-statements
-const DataGrid = ({ rows: propsRows, onPersistRows }: DataGridProps): JSX.Element => {
-  const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(propsRows);
+const DataGrid = (): JSX.Element => {
+  const [{ list }, { loading, set }] = useOptions();
+  const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(list);
   useEffect(() => {
-    setRows(propsRows);
-  }, [propsRows]);
+    setRows(list);
+  }, [list]);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
+
+  const persistRows = useCallback(async (newRows: readonly OptionsListItem[]) => {
+    await set({ list: newRows });
+    setRows(newRows);
+  }, [set]);
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   const handleRowEditStop: GridEventListener<'rowEditStop'> = useCallback((params, event) => {
@@ -64,14 +67,9 @@ const DataGrid = ({ rows: propsRows, onPersistRows }: DataGridProps): JSX.Elemen
     const result = confirm('Are you sure?');
     if (result) {
       const newRows = rows.filter(row => row.id !== id);
-      await onPersistRows(newRows);
-      setRows(newRows);
+      await persistRows(newRows);
     }
-  }, [
-    onPersistRows,
-    rows,
-    setRows
-  ]);
+  }, [persistRows, rows]);
 
   const handleCancelClick = useCallback((id: GridRowId) => (): void => {
     setRowModesModel({
@@ -105,15 +103,10 @@ const DataGrid = ({ rows: propsRows, onPersistRows }: DataGridProps): JSX.Elemen
       return row;
     });
 
-    await onPersistRows(updatedRows);
-    setRows(updatedRows);
+    await persistRows(updatedRows);
 
     return updatedRow;
-  }, [
-    onPersistRows,
-    rows,
-    setRows
-  ]);
+  }, [persistRows, rows]);
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   const handleRowModesModelChange = useCallback((newRowModesModel: GridRowModesModel) => {
@@ -177,35 +170,38 @@ const DataGrid = ({ rows: propsRows, onPersistRows }: DataGridProps): JSX.Elemen
   ]);
 
   return (
-    <MUIXDataGrid
-      columns={columnsWithActions}
-      disableColumnFilter
-      disableColumnMenu
-      disableColumnResize
-      disableColumnSelector
-      disableRowSelectionOnClick
-      editMode="row"
-      onRowEditStop={handleRowEditStop}
-      onRowModesModelChange={handleRowModesModelChange}
-      processRowUpdate={processRowUpdate}
-      rowModesModel={rowModesModel}
-      rows={rows}
-      slotProps={{
-        toolbar: {
-          setRowModesModel,
-          setRows
-        }
-      }}
-      slots={{ toolbar: DataGridToolbar }}
-      sx={{
+    <TableContainer component={Paper}>
+      <MUIXDataGrid
+        columns={columnsWithActions}
+        disableColumnFilter
+        disableColumnMenu
+        disableColumnResize
+        disableColumnSelector
+        disableRowSelectionOnClick
+        editMode="row"
+        loading={loading}
+        onRowEditStop={handleRowEditStop}
+        onRowModesModelChange={handleRowModesModelChange}
+        processRowUpdate={processRowUpdate}
+        rowModesModel={rowModesModel}
+        rows={rows}
+        slotProps={{
+          toolbar: {
+            setRowModesModel,
+            setRows
+          }
+        }}
+        slots={{ toolbar: DataGridToolbar }}
+        sx={{
         /* eslint-disable @typescript-eslint/naming-convention */
-        '& .MuiDataGrid-container--top [role="row"]': { background: 'inherit' },
-        '& .MuiDataGrid-row--editing .MuiDataGrid-cell': { background: 'inherit' },
-        '& :nth-last-child(1 of .MuiDataGrid-columnHeader) .MuiDataGrid-columnSeparator': { display: 'none' },
-        /* eslint-enable @typescript-eslint/naming-convention */
-        border: 0
-      }}
-    />
+          '& .MuiDataGrid-container--top [role="row"]': { background: 'inherit' },
+          '& .MuiDataGrid-row--editing .MuiDataGrid-cell': { background: 'inherit' },
+          '& :nth-last-child(1 of .MuiDataGrid-columnHeader) .MuiDataGrid-columnSeparator': { display: 'none' },
+          /* eslint-enable @typescript-eslint/naming-convention */
+          border: 0
+        }}
+      />
+    </TableContainer>
   );
 };
 

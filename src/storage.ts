@@ -33,7 +33,7 @@ const restoreOptions = async (): Promise<Options> => {
   return restored;
 };
 
-const saveOptions = async (options: unknown): Promise<Options> => {
+const saveOptions = async (options: Partial<Options>): Promise<Options> => {
   const parsed = parse(partialOptionsSchema, options);
   await browser.storage.sync.set(parsed);
   const saved = await restoreOptions();

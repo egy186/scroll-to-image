@@ -1,5 +1,4 @@
-import { Container, CssBaseline, FormControl, Paper, StyledEngineProvider, TableContainer, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
-import { useCallback, useMemo } from 'react';
+import { Container, CssBaseline, FormControl, Paper, StyledEngineProvider, TableContainer, ThemeProvider, Typography, createTheme } from '@mui/material';
 import { AppBar } from './components/AppBar.js';
 import { Checkbox } from './components/Checkbox.js';
 import { DataGrid } from './components/DataGrid.js';
@@ -7,15 +6,15 @@ import type { JSX } from 'react';
 import type { Options } from './storage.js';
 import { ProgressBar } from './components/ProgressBar.js';
 import { createRoot } from 'react-dom/client';
+import { useCallback } from 'react';
 import { useOptions } from './hooks/use-options.js';
 
 type OptionsListItem = Options['list'][number];
 
+const theme = createTheme({ colorSchemes: { dark: true } });
+
 // eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const App = (): JSX.Element => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const theme = useMemo(() => createTheme({ palette: { mode: prefersDarkMode ? 'dark' : 'light' } }), [prefersDarkMode]);
-
   const [options, { error, loading, set }] = useOptions();
 
   const handleChange = useCallback((name: keyof Options) => async (value: Options[keyof Options]): Promise<void> => {

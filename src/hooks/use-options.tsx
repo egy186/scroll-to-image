@@ -1,12 +1,12 @@
 import type { JSX, ReactNode } from 'react';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, useTransition } from 'react';
 import { optionsParser, restoreOptions, saveOptions } from '../storage.js';
 import type { Options } from '../storage.js';
 
 interface OptionsActions {
   readonly error: Error | null;
   readonly loading: boolean;
-  readonly set: (partialOptions: Partial<Options>) => Promise<void>;
+  readonly set: (partialOptions: Partial<Options>) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -15,8 +15,7 @@ const Context = createContext<readonly [Options, OptionsActions]>([
   {
     error: null,
     loading: true,
-    // eslint-disable-next-line @typescript-eslint/require-await
-    set: async (): Promise<void> => undefined
+    set: (): void => undefined
   }
 ]);
 
@@ -30,28 +29,28 @@ interface OptionsProviderProps {
 const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
   const [options, setOptions] = useState(optionsParser({}));
   const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, startTransition] = useTransition();
 
-  const set = useCallback(async (nextOptions: Partial<Options>) => {
-    try {
-      setError(null);
-      setLoading(true);
-      const saved = await saveOptions(nextOptions);
-      setOptions(saved);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err : new Error(String(err)));
-    } finally {
-      setLoading(false);
-    }
+  const set = useCallback((nextOptions: Partial<Options>) => {
+    startTransition(async () => {
+      try {
+        setError(null);
+        const saved = await saveOptions(nextOptions);
+        setOptions(saved);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      }
+    });
   }, []);
 
   useEffect(() => {
-    restoreOptions().then(nextOptions => {
-      setOptions(nextOptions);
-    }).catch((err: unknown) => {
-      setError(err instanceof Error ? err : new Error(String(err)));
-    }).finally(() => {
-      setLoading(false);
+    startTransition(async () => {
+      try {
+        const nextOptions = await restoreOptions();
+        setOptions(nextOptions);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err : new Error(String(err)));
+      }
     });
   }, []);
 

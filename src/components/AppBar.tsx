@@ -15,7 +15,7 @@ const AppBar = (): JSX.Element => {
   }, []);
   const handleImport = useCallback(async () => {
     const text = await inputFile.current?.files?.[0]?.text() ?? '{}';
-    await set(JSON.parse(text) as Options);
+    set(JSON.parse(text) as Options);
   }, [set]);
 
   const handleExport = useCallback(() => {

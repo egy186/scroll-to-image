@@ -36,11 +36,6 @@ const DataGrid = (): JSX.Element => {
   }, [list]);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
-  const persistRows = useCallback(async (newRows: readonly OptionsListItem[]) => {
-    await set({ list: newRows });
-    setRows(newRows);
-  }, [set]);
-
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   const handleRowEditStop: GridEventListener<'rowEditStop'> = useCallback((params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -62,14 +57,15 @@ const DataGrid = (): JSX.Element => {
     });
   }, [rowModesModel, setRowModesModel]);
 
-  const handleDeleteClick = useCallback((id: GridRowId) => async (): Promise<void> => {
+  const handleDeleteClick = useCallback((id: GridRowId) => (): void => {
     // eslint-disable-next-line no-alert
     const result = confirm('Are you sure?');
     if (result) {
       const newRows = rows.filter(row => row.id !== id);
-      await persistRows(newRows);
+      set({ list: newRows });
+      setRows(newRows);
     }
-  }, [persistRows, rows]);
+  }, [set, rows]);
 
   const handleCancelClick = useCallback((id: GridRowId) => (): void => {
     setRowModesModel({
@@ -91,7 +87,7 @@ const DataGrid = (): JSX.Element => {
     setRows
   ]);
 
-  const processRowUpdate = useCallback(async (newRow: GridRowModel<OptionsListItem>) => {
+  const processRowUpdate = useCallback((newRow: GridRowModel<OptionsListItem>) => {
     const updatedRow = {
       ...newRow,
       isNew: false
@@ -103,10 +99,11 @@ const DataGrid = (): JSX.Element => {
       return row;
     });
 
-    await persistRows(updatedRows);
+    set({ list: updatedRows });
+    setRows(updatedRows);
 
     return updatedRow;
-  }, [persistRows, rows]);
+  }, [set, rows]);
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   const handleRowModesModelChange = useCallback((newRowModesModel: GridRowModesModel) => {
@@ -152,7 +149,6 @@ const DataGrid = (): JSX.Element => {
             icon={<Delete />}
             key="delete"
             label="Delete"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={handleDeleteClick(id)}
           />
         ];

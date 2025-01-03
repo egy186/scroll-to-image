@@ -9,8 +9,8 @@ import { useOptions } from '../hooks/use-options.js';
 const Flags = (): JSX.Element => {
   const [options, { error, loading, set }] = useOptions();
 
-  const handleChange = useCallback((name: keyof Options) => async (value: Options[keyof Options]): Promise<void> => {
-    await set({ [name]: value });
+  const handleChange = useCallback((name: keyof Options) => (value: Options[keyof Options]): void => {
+    set({ [name]: value });
   }, [set]);
 
   return (

@@ -10,7 +10,7 @@ interface OptionsActions {
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const Context = createContext<readonly [Options, OptionsActions]>([
+const OptionsContext = createContext<readonly [Options, OptionsActions]>([
   optionsParser({}),
   {
     error: null,
@@ -19,7 +19,7 @@ const Context = createContext<readonly [Options, OptionsActions]>([
   }
 ]);
 
-const useOptions = (): readonly [Options, OptionsActions] => useContext(Context);
+const useOptions = (): readonly [Options, OptionsActions] => useContext(OptionsContext);
 
 interface OptionsProviderProps {
   readonly children: ReactNode;
@@ -69,9 +69,9 @@ const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
   ]) satisfies readonly [Options, OptionsActions];
 
   return (
-    <Context.Provider value={context}>
+    <OptionsContext value={context}>
       {children}
-    </Context.Provider>
+    </OptionsContext>
   );
 };
 

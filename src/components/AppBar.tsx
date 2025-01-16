@@ -41,7 +41,10 @@ const AppBar = (): JSX.Element => {
           {'Scroll to Image Options'}
         </Typography>
         <ButtonGroup color="inherit">
-          <Button onClick={handleImportClick}>
+          <Button
+            loading={loading}
+            onClick={handleImportClick}
+          >
             {'Import'}
           </Button>
           <input
@@ -51,7 +54,10 @@ const AppBar = (): JSX.Element => {
             ref={inputFile}
             type="file"
           />
-          <Button onClick={handleExport}>
+          <Button
+            loading={loading}
+            onClick={handleExport}
+          >
             {'Export'}
           </Button>
         </ButtonGroup>

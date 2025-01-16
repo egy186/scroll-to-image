@@ -1,8 +1,7 @@
 import { base, browser } from '@egy186/eslint-config';
+import type { Linter } from 'eslint';
 import globals from 'globals';
-// eslint-disable-next-line import/no-unresolved
 import { react } from '@egy186/eslint-config/react';
-// eslint-disable-next-line import/no-unresolved
 import { typescript } from '@egy186/eslint-config/typescript';
 
 const config = [
@@ -14,22 +13,20 @@ const config = [
     languageOptions: {
       ...browser.languageOptions,
       globals: {
-        ...globals.es2023,
-        ...globals.browser,
+        ...browser.languageOptions.globals,
         ...globals.webextensions
       }
     }
   },
   {
     ...react,
-    files: ['src/**/*.ts', 'src/**/*.tsx'],
     rules: {
       ...react.rules,
-      'react/jsx-max-depth': 'off',
-      'react/react-in-jsx-scope': 'off'
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'react/jsx-max-depth': 'off'
     }
   },
   typescript
-];
+] as const satisfies Linter.Config[];
 
 export default config;

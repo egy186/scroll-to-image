@@ -41,6 +41,10 @@
         {
           "update_link": "https://github.com/egy186/scroll-to-image/releases/download/v0.7.0/scroll_to_image-0.7.0.xpi",
           "version": "0.7.0"
+        },
+        {
+          "update_link": "https://github.com/egy186/scroll-to-image/releases/download/v0.8.0/scroll_to_image-0.8.0.xpi",
+          "version": "0.8.0"
         }
       ]
     }

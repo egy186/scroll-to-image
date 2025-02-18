@@ -12,7 +12,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.4.0",
-    "@mui/x-data-grid": "^7.26.0",
+    "@mui/x-data-grid": "^7.27.0",
     "@parcel/config-webextension": "^2.13.3",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/node": "^22.13.0",

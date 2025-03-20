@@ -30,7 +30,7 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.0",
-    "valibot": "^0.42.1",
+    "valibot": "^1.0.0",
     "web-ext": "^8.5.0"
   },
   "homepage": "https://github.com/egy186/scroll-to-image#readme",

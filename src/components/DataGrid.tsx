@@ -25,7 +25,7 @@ const columns = [
     headerName: 'CSS Selector',
     type: 'string'
   }
-] as const satisfies GridColDef<GridRowModel<OptionsListItem>, string>[];
+] as const satisfies ReadonlyArray<GridColDef<GridRowModel<OptionsListItem>, string>>;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function, max-statements
 const DataGrid = (): JSX.Element => {
@@ -114,7 +114,7 @@ const DataGrid = (): JSX.Element => {
     {
       field: 'actions',
       // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-      getActions: ({ id }): readonly ReactElement<GridActionsCellItemProps>[] => {
+      getActions: ({ id }): ReadonlyArray<ReactElement<GridActionsCellItemProps>> => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
         if (isInEditMode) {
@@ -157,7 +157,7 @@ const DataGrid = (): JSX.Element => {
       type: 'actions'
     },
     ...columns
-  ] as const satisfies GridColDef<GridRowModel<OptionsListItem>, string>[], [
+  ] as const satisfies ReadonlyArray<GridColDef<GridRowModel<OptionsListItem>, string>>, [
     handleCancelClick,
     handleDeleteClick,
     handleEditClick,

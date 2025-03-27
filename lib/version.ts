@@ -21,10 +21,10 @@ const updateManifestFile = new URL('../docs/updates.json', import.meta.url);
 const updateManifest = JSON.parse(await readFile(updateManifestFile, 'utf8')) as {
   readonly addons: {
     readonly [id: typeof manifest.browser_specific_settings.gecko.id]: {
-      readonly updates: {
+      readonly updates: Array<{
         readonly update_link: string;
         readonly version: string;
-      }[];
+      }>;
     };
   };
 };

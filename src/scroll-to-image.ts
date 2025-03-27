@@ -1,7 +1,7 @@
 import type { Message } from './message.js';
 
 class Scroller {
-  #elements: readonly Element[] = [];
+  #elements: ReadonlyArray<Element> = [];
 
   #index = -1;
 
@@ -11,12 +11,12 @@ class Scroller {
   };
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-  public constructor (elements: readonly Element[] = [], behavior: ScrollIntoViewOptions['behavior'] = 'instant') {
+  public constructor (elements: ReadonlyArray<Element> = [], behavior: ScrollIntoViewOptions['behavior'] = 'instant') {
     this.init(elements, behavior);
   }
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-  public init (elements: readonly Element[], behavior: ScrollIntoViewOptions['behavior']): void {
+  public init (elements: ReadonlyArray<Element>, behavior: ScrollIntoViewOptions['behavior']): void {
     this.#elements = elements;
     this.#index = -1;
     this.#scrollIntoViewOptions = {

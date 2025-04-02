@@ -15,7 +15,7 @@
     "@mui/x-data-grid": "^7.28.0",
     "@parcel/config-webextension": "^2.14.0",
     "@types/firefox-webext-browser": "^120.0.4",
-    "@types/node": "^22.13.0",
+    "@types/node": "^22.14.0",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.23.0",

@@ -16,7 +16,7 @@
     "@parcel/config-webextension": "^2.14.0",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/node": "^22.14.0",
-    "@types/react": "^19.0.12",
+    "@types/react": "^19.1.0",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.24.0",
     "eslint-import-resolver-typescript": "^4.3.1",

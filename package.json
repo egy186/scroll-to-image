@@ -1,10 +1,37 @@
 {
   "name": "scroll-to-image",
-  "description": "Scroll to the next image.",
   "version": "0.8.0",
-  "author": "egy186",
+  "private": true,
+  "description": "Scroll to the next image.",
+  "homepage": "https://github.com/egy186/scroll-to-image#readme",
   "bugs": {
     "url": "https://github.com/egy186/scroll-to-image/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egy186/scroll-to-image.git"
+  },
+  "license": "MIT",
+  "author": "egy186",
+  "type": "module",
+  "source": [
+    "src/manifest.json",
+    "src/scroll-to-image.ts"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "parcel build",
+    "clean": "rimraf dist web-ext-artifacts",
+    "lint": "npm run lint:eslint && npm run lint:typecheck && npm run lint:manifest",
+    "lint:eslint": "eslint",
+    "prelint:manifest": "npm run build",
+    "lint:manifest": "web-ext lint --self-hosted",
+    "lint:typecheck": "tsc",
+    "prerelease": "npm run build",
+    "release": "web-ext sign --channel unlisted --api-key $API_KEY --api-secret $API_SECRET",
+    "prestart": "npm run build",
+    "start": "web-ext run --devtools",
+    "version": "jiti lib/version.ts && git add docs/updates.json src/manifest.json"
   },
   "devDependencies": {
     "@egy186/eslint-config": "^2.9.0",
@@ -33,36 +60,9 @@
     "valibot": "^1.0.0",
     "web-ext": "^8.5.0"
   },
-  "homepage": "https://github.com/egy186/scroll-to-image#readme",
-  "license": "MIT",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/egy186/scroll-to-image.git"
-  },
-  "scripts": {
-    "build": "parcel build",
-    "clean": "rimraf dist web-ext-artifacts",
-    "lint": "npm run lint:eslint && npm run lint:typecheck && npm run lint:manifest",
-    "lint:eslint": "eslint",
-    "lint:manifest": "web-ext lint --self-hosted",
-    "lint:typecheck": "tsc",
-    "prebuild": "rimraf dist",
-    "prelint:manifest": "npm run build",
-    "prerelease": "npm run build",
-    "prestart": "npm run build",
-    "release": "web-ext sign --channel unlisted --api-key $API_KEY --api-secret $API_SECRET",
-    "start": "web-ext run --devtools",
-    "version": "jiti lib/version.ts && git add docs/updates.json src/manifest.json"
-  },
-  "source": [
-    "src/manifest.json",
-    "src/scroll-to-image.ts"
-  ],
   "targets": {
     "default": {
       "sourceMap": false
     }
-  },
-  "type": "module"
+  }
 }

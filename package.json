@@ -58,7 +58,7 @@
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.31.0",
     "valibot": "^1.0.0",
-    "web-ext": "^8.5.0"
+    "web-ext": "^8.6.0"
   },
   "targets": {
     "default": {

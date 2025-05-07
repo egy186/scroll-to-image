@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, useTransition } from 'react';
-import { optionsParser, restoreOptions, saveOptions } from '../storage.js';
+import { defaultOptions, restoreOptions, saveOptions } from '../storage.js';
 import type { Options } from '../storage.js';
 
 interface OptionsActions {
@@ -11,7 +11,7 @@ interface OptionsActions {
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const OptionsContext = createContext<readonly [Options, OptionsActions]>([
-  optionsParser({}),
+  defaultOptions,
   {
     error: null,
     loading: true,
@@ -27,7 +27,7 @@ interface OptionsProviderProps {
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/prefer-readonly-parameter-types
 const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
-  const [options, setOptions] = useState(optionsParser({}));
+  const [options, setOptions] = useState(defaultOptions);
   const [error, setError] = useState<Error | null>(null);
   const [loading, startTransition] = useTransition();
 

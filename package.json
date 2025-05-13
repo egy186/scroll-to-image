@@ -40,7 +40,7 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "@mui/x-data-grid": "^7.29.0",
-    "@parcel/config-webextension": "^2.14.0",
+    "@parcel/config-webextension": "^2.15.0",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",

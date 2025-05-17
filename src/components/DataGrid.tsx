@@ -138,17 +138,17 @@ const DataGrid = (): JSX.Element => {
 
         return [
           <GridActionsCellItem
-            color="primary"
             icon={<Edit />}
             key="edit"
             label="Edit"
+            material={{ color: 'primary' }}
             onClick={handleEditClick(id)}
           />,
           <GridActionsCellItem
-            color="secondary"
             icon={<Delete />}
             key="delete"
             label="Delete"
+            material={{ color: 'secondary' }}
             onClick={handleDeleteClick(id)}
           />
         ];
@@ -181,6 +181,7 @@ const DataGrid = (): JSX.Element => {
         processRowUpdate={processRowUpdate}
         rowModesModel={rowModesModel}
         rows={rows}
+        showToolbar
         slotProps={{
           toolbar: {
             setRowModesModel,
@@ -189,11 +190,8 @@ const DataGrid = (): JSX.Element => {
         }}
         slots={{ toolbar: DataGridToolbar }}
         sx={{
-        /* eslint-disable @typescript-eslint/naming-convention */
-          '& .MuiDataGrid-container--top [role="row"]': { background: 'inherit' },
-          '& .MuiDataGrid-row--editing .MuiDataGrid-cell': { background: 'inherit' },
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           '& :nth-last-child(1 of .MuiDataGrid-columnHeader) .MuiDataGrid-columnSeparator': { display: 'none' },
-          /* eslint-enable @typescript-eslint/naming-convention */
           border: 0
         }}
       />

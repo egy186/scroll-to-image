@@ -1,9 +1,9 @@
-import { GridRowModes, GridToolbarContainer } from '@mui/x-data-grid';
+import { GridRowModes, Toolbar, ToolbarButton } from '@mui/x-data-grid';
 import type { GridRowModesModel, GridSlotProps, GridRowsProp as MUIXGridRowsProp } from '@mui/x-data-grid';
 import { Add } from '@mui/icons-material';
-import { Button } from '@mui/material';
 import type { JSX } from 'react';
 import type { Options } from '../storage.js';
+import { Tooltip } from '@mui/material';
 import { useCallback } from 'react';
 
 type GridRowsProp = MUIXGridRowsProp<Options['list'][number] & { readonly isNew?: boolean }>;
@@ -42,15 +42,13 @@ const DataGridToolbar = ({ setRows, setRowModesModel }: GridSlotProps['toolbar']
   }, [setRowModesModel, setRows]);
 
   return (
-    <GridToolbarContainer>
-      <Button
-        color="primary"
-        onClick={handleClick}
-        startIcon={<Add />}
-      >
-        {'Add pattern'}
-      </Button>
-    </GridToolbarContainer>
+    <Toolbar>
+      <Tooltip title="Add pattern">
+        <ToolbarButton onClick={handleClick}>
+          <Add fontSize="small" />
+        </ToolbarButton>
+      </Tooltip>
+    </Toolbar>
   );
 };
 

@@ -34,7 +34,7 @@
     "version": "jiti lib/version.ts && git add docs/updates.json src/manifest.json"
   },
   "devDependencies": {
-    "@egy186/eslint-config": "^2.9.0",
+    "@egy186/eslint-config": "^3.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.0",

@@ -18,6 +18,10 @@
     "src/manifest.json",
     "src/scroll-to-image.ts"
   ],
+  "files": [
+    "dist",
+    "docs"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "parcel build",

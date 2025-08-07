@@ -64,6 +64,9 @@
     "valibot": "^1.1.0",
     "web-ext": "^8.9.0"
   },
+  "@parcel/resolver-default": {
+    "packageExports": true
+  },
   "targets": {
     "default": {
       "sourceMap": false

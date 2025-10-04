@@ -38,7 +38,7 @@
     "version": "jiti lib/version.ts && git add docs/updates.json src/manifest.json"
   },
   "devDependencies": {
-    "@egy186/eslint-config": "^3.4.0",
+    "@egy186/eslint-config": "^3.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.3.1",
@@ -52,7 +52,7 @@
     "eslint": "^9.37.0",
     "eslint-import-resolver-typescript": "^4.4.1",
     "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^6.1.1",
     "globals": "^16.4.0",
     "jiti": "^2.6.0",
     "parcel": "^2.16.0",

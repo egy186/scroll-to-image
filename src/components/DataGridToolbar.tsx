@@ -13,7 +13,7 @@ declare module '@mui/x-data-grid' {
     setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
     setRowModesModel: (
       // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-      newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
+      newModel: (oldModel: GridRowModesModel) => GridRowModesModel
     ) => void;
   }
 }

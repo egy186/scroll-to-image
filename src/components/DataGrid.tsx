@@ -1,16 +1,23 @@
-import { Close, Delete, Edit, Save } from '@mui/icons-material';
-import { GridActionsCellItem, GridRowEditStopReasons, GridRowModes, DataGrid as MUIXDataGrid } from '@mui/x-data-grid';
-import type { GridActionsCellItemProps, GridColDef, GridEventListener, GridRowId, GridRowModel, GridRowModesModel, GridRowsProp } from '@mui/x-data-grid';
-import type { JSX, ReactElement } from 'react';
+import { DataGridActions, DataGridActionsHandlersContext } from './DataGridActions.js';
+import type { GridColDef, GridEventListener, GridRowId, GridRowModel, GridRowModesModel, GridRowsProp } from '@mui/x-data-grid';
+import { GridRowEditStopReasons, GridRowModes, DataGrid as MUIXDataGrid } from '@mui/x-data-grid';
 import { Paper, TableContainer } from '@mui/material';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DataGridToolbar } from './DataGridToolbar.js';
+import type { JSX } from 'react';
 import type { Options } from '../storage.js';
 import { useOptions } from '../hooks/use-options.js';
 
 type OptionsListItem = Options['list'][number];
 
 const columns = [
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
+    renderCell: (params): JSX.Element => <DataGridActions {...params} />,
+    type: 'actions'
+  },
   {
     editable: true,
     field: 'pattern',
@@ -27,7 +34,7 @@ const columns = [
   }
 ] as const satisfies ReadonlyArray<GridColDef<GridRowModel<OptionsListItem>, string>>;
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function, max-statements
+// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const DataGrid = (): JSX.Element => {
   const [{ list }, { loading, set }] = useOptions();
   const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(list);
@@ -42,50 +49,6 @@ const DataGrid = (): JSX.Element => {
       event.defaultMuiPrevented = true;
     }
   }, []);
-
-  const handleEditClick = useCallback((id: GridRowId) => (): void => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.Edit }
-    });
-  }, [rowModesModel, setRowModesModel]);
-
-  const handleSaveClick = useCallback((id: GridRowId) => (): void => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View }
-    });
-  }, [rowModesModel, setRowModesModel]);
-
-  const handleDeleteClick = useCallback((id: GridRowId) => (): void => {
-    // eslint-disable-next-line no-alert
-    const result = confirm('Are you sure?');
-    if (result) {
-      const newRows = rows.filter(row => row.id !== id);
-      set({ list: newRows });
-      setRows(newRows);
-    }
-  }, [set, rows]);
-
-  const handleCancelClick = useCallback((id: GridRowId) => (): void => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: {
-        ignoreModifications: true,
-        mode: GridRowModes.View
-      }
-    });
-
-    const editedRow = rows.find(row => row.id === id);
-    if (editedRow?.isNew === true) {
-      setRows(rows.filter(row => row.id !== id));
-    }
-  }, [
-    rowModesModel,
-    rows,
-    setRowModesModel,
-    setRows
-  ]);
 
   const processRowUpdate = useCallback((newRow: GridRowModel<OptionsListItem>) => {
     const updatedRow = {
@@ -110,91 +73,81 @@ const DataGrid = (): JSX.Element => {
     setRowModesModel(newRowModesModel);
   }, [setRowModesModel]);
 
-  const columnsWithActions = useMemo(() => [
-    {
-      field: 'actions',
-      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-      getActions: ({ id }): ReadonlyArray<ReactElement<GridActionsCellItemProps>> => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              color="inherit"
-              icon={<Save />}
-              key="save"
-              label="Save"
-              onClick={handleSaveClick(id)}
-            />,
-            <GridActionsCellItem
-              color="inherit"
-              icon={<Close />}
-              key="cancel"
-              label="Cancel"
-              onClick={handleCancelClick(id)}
-            />
-          ];
+  const actionsHandlers = useMemo(() => ({
+    cancel: (id: GridRowId): void => {
+      setRowModesModel({
+        ...rowModesModel,
+        [id]: {
+          ignoreModifications: true,
+          mode: GridRowModes.View
         }
+      });
 
-        return [
-          <GridActionsCellItem
-            icon={<Edit />}
-            key="edit"
-            label="Edit"
-            material={{ color: 'primary' }}
-            onClick={handleEditClick(id)}
-          />,
-          <GridActionsCellItem
-            icon={<Delete />}
-            key="delete"
-            label="Delete"
-            material={{ color: 'secondary' }}
-            onClick={handleDeleteClick(id)}
-          />
-        ];
-      },
-      headerName: 'Actions',
-      type: 'actions'
+      const editedRow = rows.find(row => row.id === id);
+      if (editedRow?.isNew === true) {
+        setRows(rows.filter(row => row.id !== id));
+      }
     },
-    ...columns
-  ] as const satisfies ReadonlyArray<GridColDef<GridRowModel<OptionsListItem>, string>>, [
-    handleCancelClick,
-    handleDeleteClick,
-    handleEditClick,
-    handleSaveClick,
-    rowModesModel
+    delete: (id: GridRowId): void => {
+    // eslint-disable-next-line no-alert
+      const result = confirm('Are you sure?');
+      if (result) {
+        const newRows = rows.filter(row => row.id !== id);
+        set({ list: newRows });
+        setRows(newRows);
+      }
+    },
+    edit: (id: GridRowId): void => {
+      setRowModesModel({
+        ...rowModesModel,
+        [id]: { mode: GridRowModes.Edit }
+      });
+    },
+    isInEditMode: (id: GridRowId): boolean => rowModesModel[id]?.mode === GridRowModes.Edit,
+    save: (id: GridRowId): void => {
+      setRowModesModel({
+        ...rowModesModel,
+        [id]: { mode: GridRowModes.View }
+      });
+    }
+  } as const), [
+    rowModesModel,
+    rows,
+    set
   ]);
 
   return (
     <TableContainer component={Paper}>
-      <MUIXDataGrid
-        columns={columnsWithActions}
-        disableColumnFilter
-        disableColumnMenu
-        disableColumnResize
-        disableColumnSelector
-        disableRowSelectionOnClick
-        editMode="row"
-        loading={loading}
-        onRowEditStop={handleRowEditStop}
-        onRowModesModelChange={handleRowModesModelChange}
-        processRowUpdate={processRowUpdate}
-        rowModesModel={rowModesModel}
-        rows={rows}
-        showToolbar
-        slotProps={{
-          toolbar: {
-            setRowModesModel,
-            setRows
-          }
-        }}
-        slots={{ toolbar: DataGridToolbar }}
-        sx={{
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          '& :nth-last-child(1 of .MuiDataGrid-columnHeader) .MuiDataGrid-columnSeparator': { display: 'none' },
-          border: 0
-        }}
-      />
+      <DataGridActionsHandlersContext value={actionsHandlers}>
+        <MUIXDataGrid
+          columns={columns}
+          disableColumnFilter
+          disableColumnMenu
+          disableColumnResize
+          disableColumnSelector
+          disableRowSelectionOnClick
+          editMode="row"
+          loading={loading}
+          onRowEditStop={handleRowEditStop}
+          onRowModesModelChange={handleRowModesModelChange}
+          processRowUpdate={processRowUpdate}
+          rowModesModel={rowModesModel}
+          rows={rows}
+          showToolbar
+          slotProps={{
+            toolbar: {
+              setRowModesModel,
+              setRows
+            }
+          }}
+          slots={{ toolbar: DataGridToolbar }}
+          sx={{
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            '& :nth-last-child(1 of .MuiDataGrid-columnHeader) .MuiDataGrid-columnSeparator': { display: 'none' },
+            border: 0
+          }}
+        />
+      </DataGridActionsHandlersContext>
     </TableContainer>
   );
 };

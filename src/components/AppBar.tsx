@@ -13,9 +13,12 @@ const AppBar = (): JSX.Element => {
   const handleImportClick = useCallback(() => {
     inputFile.current?.click();
   }, []);
-  const handleImport = useCallback(async () => {
-    const text = await inputFile.current?.files?.[0]?.text() ?? '{}';
-    set(JSON.parse(text) as Options);
+  const handleImport = useCallback(() => {
+    // eslint-disable-next-line no-void
+    void inputFile.current?.files?.[0]?.text()
+      .then(text => {
+        set(JSON.parse(text) as Options);
+      });
   }, [set]);
 
   const handleExport = useCallback(() => {
@@ -49,7 +52,6 @@ const AppBar = (): JSX.Element => {
           </Button>
           <input
             hidden
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onChange={handleImport}
             ref={inputFile}
             type="file"

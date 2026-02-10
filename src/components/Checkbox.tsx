@@ -7,14 +7,14 @@ interface ChackboxProps {
   readonly disabled: boolean;
   readonly label: Readonly<ReactNode>;
   readonly name: string;
-  readonly onChange: (checked: boolean) => void | Promise<void>;
+  readonly onChange: (checked: boolean) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention ,@typescript-eslint/prefer-readonly-parameter-types
 const Checkbox = ({ checked, disabled, label, name, onChange }: ChackboxProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-  const handleChange = useCallback(async (evt: Readonly<ChangeEvent<HTMLInputElement>>) => {
-    await onChange(evt.target.checked);
+  const handleChange = useCallback((evt: Readonly<ChangeEvent<HTMLInputElement>>) => {
+    onChange(evt.target.checked);
   }, [onChange]);
 
   return (
@@ -24,7 +24,6 @@ const Checkbox = ({ checked, disabled, label, name, onChange }: ChackboxProps): 
           checked={checked}
           color="primary"
           name={name}
-          /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
           onChange={handleChange}
         />
       )}

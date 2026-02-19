@@ -5,7 +5,6 @@ import type { JSX } from 'react';
 import type { Options } from '../storage.js';
 import { useOptions } from '../hooks/use-options.js';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const Flags = (): JSX.Element => {
   const [options, { error, loading, set }] = useOptions();
 

@@ -10,15 +10,15 @@ type GridRowsProp = MUIXGridRowsProp<Options['list'][number] & { readonly isNew?
 
 declare module '@mui/x-data-grid' {
   interface ToolbarPropsOverrides {
-    setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
-    setRowModesModel: (
+    readonly setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void;
+    readonly setRowModesModel: (
       // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
       newModel: (oldModel: GridRowModesModel) => GridRowModesModel
     ) => void;
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/prefer-readonly-parameter-types
+// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const DataGridToolbar = ({ setRows, setRowModesModel }: GridSlotProps['toolbar']): JSX.Element => {
   const handleClick = useCallback(() => {
     const id = crypto.randomUUID();

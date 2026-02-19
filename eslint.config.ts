@@ -1,8 +1,8 @@
 import { base, browser } from '@egy186/eslint-config';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
-import { react } from '@egy186/eslint-config/react';
 import { typescript } from '@egy186/eslint-config/typescript';
+import { typescriptReact } from '@egy186/eslint-config/typescript-react';
 
 const config = defineConfig([
   globalIgnores(['dist']),
@@ -18,15 +18,8 @@ const config = defineConfig([
       }
     }
   },
-  {
-    ...react,
-    rules: {
-      ...react.rules,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      'react/jsx-max-depth': 'off'
-    }
-  },
-  typescript
+  typescript,
+  typescriptReact
 ]);
 
 export default config;

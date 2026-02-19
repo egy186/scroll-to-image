@@ -5,7 +5,6 @@ import type { Options } from '../storage.js';
 import { ProgressBar } from './ProgressBar.js';
 import { useOptions } from '../hooks/use-options.js';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
 const AppBar = (): JSX.Element => {
   const [options, { loading, set }] = useOptions();
 

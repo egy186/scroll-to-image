@@ -34,7 +34,7 @@ const columns = [
   }
 ] as const satisfies ReadonlyArray<GridColDef<GridRowModel<OptionsListItem>, string>>;
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, max-lines-per-function
+// eslint-disable-next-line max-lines-per-function
 const DataGrid = (): JSX.Element => {
   const [{ list }, { loading, set }] = useOptions();
   const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(list);

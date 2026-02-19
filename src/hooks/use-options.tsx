@@ -9,7 +9,6 @@ interface OptionsActions {
   readonly set: (partialOptions: Partial<Options>) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const OptionsContext = createContext<readonly [Options, OptionsActions]>([
   defaultOptions,
   {
@@ -25,7 +24,7 @@ interface OptionsProviderProps {
   readonly children: ReactNode;
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/prefer-readonly-parameter-types
+// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
   const [options, setOptions] = useState(defaultOptions);
   const [error, setError] = useState<Error | null>(null);

@@ -1,6 +1,6 @@
 import { LinearProgress, styled } from '@mui/material';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/prefer-readonly-parameter-types
+// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const ProgressBar = styled(LinearProgress)(({ theme }) => ({
   left: 0,
   position: 'fixed',

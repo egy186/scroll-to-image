@@ -5,14 +5,13 @@ import { createContext, useCallback, useContext } from 'react';
 import type { JSX } from 'react';
 
 interface DataGridActionsHandlers {
-  cancel: (id: GridRowId) => void;
-  delete: (id: GridRowId) => void;
-  edit: (id: GridRowId) => void;
-  isInEditMode: (id: GridRowId) => boolean;
-  save: (id: GridRowId) => void;
+  readonly cancel: (id: GridRowId) => void;
+  readonly delete: (id: GridRowId) => void;
+  readonly edit: (id: GridRowId) => void;
+  readonly isInEditMode: (id: GridRowId) => boolean;
+  readonly save: (id: GridRowId) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const DataGridActionsHandlersContext = createContext<DataGridActionsHandlers>({
   cancel: () => undefined,
   delete: () => undefined,
@@ -21,7 +20,7 @@ const DataGridActionsHandlersContext = createContext<DataGridActionsHandlers>({
   save: () => undefined
 });
 
-// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/prefer-readonly-parameter-types, max-lines-per-function
+// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const DataGridActions = (props: GridRenderCellParams): JSX.Element => {
   const { id } = props;
 

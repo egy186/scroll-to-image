@@ -20,7 +20,6 @@ const theme = createTheme({
   }
 });
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const App = (): JSX.Element => (
   <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme}>

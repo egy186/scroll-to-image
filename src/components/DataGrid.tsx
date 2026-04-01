@@ -37,6 +37,7 @@ const columns = [
 // eslint-disable-next-line max-lines-per-function
 const DataGrid = (): JSX.Element => {
   const [{ list }, { loading, set }] = useOptions();
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-arguments
   const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(list);
   useEffect(() => {
     setRows(list);

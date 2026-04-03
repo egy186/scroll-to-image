@@ -5,7 +5,10 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "{d85e84a8-8446-4496-8585-66ef63f6e556}",
-      "strict_min_version": "68.0",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      },
       "update_url": "https://egy186.github.io/scroll-to-image/updates.json"
     }
   },

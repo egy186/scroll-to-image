@@ -1,6 +1,6 @@
 # Scroll to Image
 
-[![Node.js CI](https://github.com/egy186/scroll-to-image/actions/workflows/node.js.yml/badge.svg)](https://github.com/egy186/scroll-to-image/actions/workflows/node.js.yml)
+[![CI](https://github.com/egy186/scroll-to-image/actions/workflows/ci.yml/badge.svg)](https://github.com/egy186/scroll-to-image/actions/workflows/ci.yml)
 
 Scroll to the next image.
 

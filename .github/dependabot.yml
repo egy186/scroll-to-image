@@ -1,9 +1,40 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "daily"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch"]
+      interval: daily
+    groups:
+      emotion:
+        patterns:
+          - '@emotion/*'
+      eslint:
+        patterns:
+          - '@egy186/eslint-config'
+          - eslint
+          - eslint-import-resolver-typescript
+          - eslint-plugin-*
+          - typescript-eslint
+      mui:
+        patterns:
+          - '@mui/*'
+      parcel:
+        patterns:
+          - '@parcel/*'
+          - parcel
+      react:
+        patterns:
+          - '@types/react'
+          - '@types/react-dom'
+          - react
+          - react-dom
+    cooldown:
+      default-days: 3
+      exclude:
+        - '@egy186/*'
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3

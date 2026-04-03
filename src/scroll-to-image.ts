@@ -16,7 +16,7 @@ class Scroller {
   }
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-  public init (elements: ReadonlyArray<Element>, behavior: ScrollIntoViewOptions['behavior']): void {
+  public init (elements: ReadonlyArray<Element>, behavior: NonNullable<ScrollIntoViewOptions['behavior']>): void {
     this.#elements = elements;
     this.#index = -1;
     this.#scrollIntoViewOptions = {

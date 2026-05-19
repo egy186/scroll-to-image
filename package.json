@@ -43,7 +43,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.0.1",
     "@mui/material": "^9.0.1",
-    "@mui/x-data-grid": "^9.1.0",
+    "@mui/x-data-grid": "^9.2.0",
     "@parcel/config-webextension": "^2.16.4",
     "@types/firefox-webext-browser": "^143.0.0",
     "@types/node": "^25.8.0",

@@ -62,7 +62,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.58.0",
     "valibot": "^1.4.0",
-    "web-ext": "^10.1.0"
+    "web-ext": "^10.2.0"
   },
   "@parcel/resolver-default": {
     "packageExports": true

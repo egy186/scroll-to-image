@@ -28,6 +28,7 @@ interface OptionsProviderProps {
 const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
   const [options, setOptions] = useState(defaultOptions);
   const [error, setError] = useState<Error | null>(null);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [loading, startTransition] = useTransition();
 
   const set = useCallback((nextOptions: Partial<Options>) => {
@@ -49,6 +50,8 @@ const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
         setOptions(nextOptions);
       } catch (err: unknown) {
         setError(err instanceof Error ? err : new Error(String(err)));
+      } finally {
+        setInitialLoading(false);
       }
     });
   }, []);
@@ -57,11 +60,12 @@ const OptionsProvider = ({ children }: OptionsProviderProps): JSX.Element => {
     options,
     {
       error,
-      loading,
+      loading: initialLoading || loading,
       set
     }
   ], [
     error,
+    initialLoading,
     loading,
     options,
     set

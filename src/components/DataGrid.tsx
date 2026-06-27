@@ -2,7 +2,7 @@ import { DataGridActions, DataGridActionsHandlersContext } from './DataGridActio
 import type { GridColDef, GridEventListener, GridRowId, GridRowModel, GridRowModesModel, GridRowsProp } from '@mui/x-data-grid';
 import { GridRowEditStopReasons, GridRowModes, DataGrid as MUIXDataGrid } from '@mui/x-data-grid';
 import { Paper, TableContainer } from '@mui/material';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DataGridToolbar } from './DataGridToolbar.js';
 import type { JSX } from 'react';
 import type { Options } from '../storage.js';
@@ -37,11 +37,15 @@ const columns = [
 // eslint-disable-next-line max-lines-per-function
 const DataGrid = (): JSX.Element => {
   const [{ list }, { loading, set }] = useOptions();
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-arguments
-  const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>(list);
+  const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>([]);
+  const initialized = useRef(false);
   useEffect(() => {
-    setRows(list);
-  }, [list]);
+    if (!initialized.current && !loading) {
+      initialized.current = true;
+      setRows(list);
+    }
+  }, [loading, list]);
+
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
   // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types

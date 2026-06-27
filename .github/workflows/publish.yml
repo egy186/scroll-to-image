@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     if: github.repository == 'egy186/scroll-to-image'
@@ -29,8 +32,6 @@ jobs:
         API_SECRET: ${{ secrets.API_SECRET }}
 
     - name: Publish
-      uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda
-      with:
-        files: web-ext-artifacts/*.xpi
+      run: gh release create "${{ github.ref_name }}" web-ext-artifacts/*.xpi --generate-notes
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

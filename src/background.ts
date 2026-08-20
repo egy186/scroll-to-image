@@ -16,13 +16,16 @@ browser.tabs.onUpdated.addListener((_id, changeInfo, tab) => {
 
       if (typeof selector === 'string') {
         if (fitHeight) {
-        // Append style element
+          // Append style element
           const css = `${selector} { max-height: 100vh; width: auto; }`;
-          await browser.tabs.insertCSS(tab.id, { code: css });
+          await browser.scripting.insertCSS({
+            css,
+            target: { tabId: tab.id }
+          });
         }
-        await browser.tabs.executeScript(tab.id, {
-          file: 'scroll-to-image.js',
-          runAt: 'document_idle'
+        await browser.scripting.executeScript({
+          files: ['scroll-to-image.js'],
+          target: { tabId: tab.id }
         });
 
         await browser.tabs.sendMessage(tab.id, {

@@ -34,18 +34,21 @@
     }
   },
   "homepage_url": "https://github.com/egy186/scroll-to-image#readme",
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "icons": {
     "48": "assets/icon.png",
     "96": "assets/icon@2x.png"
   },
-  "manifest_version": 2,
+  "manifest_version": 3,
   "options_ui": {
     "open_in_tab": true,
     "page": "index.html"
   },
   "permissions": [
-    "<all_urls>",
     "activeTab",
+    "scripting",
     "storage",
     "tabs"
   ]

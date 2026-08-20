@@ -47,21 +47,21 @@ browser.commands.onCommand.addListener(command => {
   })
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     .then(tabs => {
-      // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-      tabs.forEach(tab => {
+      for (const tab of tabs) {
+        if (typeof tab.id !== 'number') {
+          continue;
+        }
         switch (command) {
           case 'scroll-to-next':
           case 'scroll-to-previous':
-            if (typeof tab.id === 'number') {
-              // eslint-disable-next-line no-void
-              void browser.tabs.sendMessage(tab.id, {
-                command,
-                kind: 'command'
-              } satisfies CommandMessage);
-            }
+            // eslint-disable-next-line no-void
+            void browser.tabs.sendMessage(tab.id, {
+              command,
+              kind: 'command'
+            } satisfies CommandMessage);
             break;
           default:
         }
-      });
+      }
     });
 });

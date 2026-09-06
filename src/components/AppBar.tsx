@@ -8,13 +8,13 @@ import { useOptions } from '../hooks/use-options.js';
 const AppBar = (): JSX.Element => {
   const [options, { loading, set }] = useOptions();
 
-  const inputFile = useRef<HTMLInputElement>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
   const handleImportClick = useCallback(() => {
-    inputFile.current?.click();
+    inputFileRef.current?.click();
   }, []);
   const handleImport = useCallback(() => {
     // eslint-disable-next-line no-void
-    void inputFile.current?.files?.[0]?.text()
+    void inputFileRef.current?.files?.[0]?.text()
       .then(text => {
         set(JSON.parse(text) as Options);
       });
@@ -52,7 +52,7 @@ const AppBar = (): JSX.Element => {
           <input
             hidden
             onChange={handleImport}
-            ref={inputFile}
+            ref={inputFileRef}
             type="file"
           />
           <Button

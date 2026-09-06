@@ -1,5 +1,5 @@
 import type { JSX, ReactNode } from 'react';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, useTransition } from 'react';
+import { createContext, use, useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 import { defaultOptions, restoreOptions, saveOptions } from '../storage.js';
 import type { Options } from '../storage.js';
 
@@ -17,8 +17,9 @@ const OptionsContext = createContext<readonly [Options, OptionsActions]>([
     set: (): void => undefined
   }
 ]);
+OptionsContext.displayName = 'OptionsContext';
 
-const useOptions = (): readonly [Options, OptionsActions] => useContext(OptionsContext);
+const useOptions = (): readonly [Options, OptionsActions] => use(OptionsContext);
 
 interface OptionsProviderProps {
   readonly children: ReactNode;

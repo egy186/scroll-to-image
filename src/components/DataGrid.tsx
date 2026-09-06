@@ -38,10 +38,10 @@ const columns = [
 const DataGrid = (): JSX.Element => {
   const [{ list }, { loading, set }] = useOptions();
   const [rows, setRows] = useState<GridRowsProp<OptionsListItem & { readonly isNew?: boolean }>>([]);
-  const initialized = useRef(false);
+  const initializedRef = useRef(false);
   useEffect(() => {
-    if (!initialized.current && !loading) {
-      initialized.current = true;
+    if (!initializedRef.current && !loading) {
+      initializedRef.current = true;
       setRows(list);
     }
   }, [loading, list]);

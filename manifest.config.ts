@@ -12,9 +12,7 @@ const manifest = defineManifest({
   },
   browser_specific_settings: {
     gecko: {
-      data_collection_permissions: {
-        required: ['none']
-      },
+      data_collection_permissions: { required: ['none'] },
       id: geckoId,
       strict_min_version: '142.0',
       update_url: 'https://egy186.github.io/scroll-to-image/updates.json'
@@ -23,15 +21,11 @@ const manifest = defineManifest({
   commands: {
     'scroll-to-next': {
       description: 'Scroll to the next image',
-      suggested_key: {
-        default: 'Ctrl+Space'
-      }
+      suggested_key: { default: 'Ctrl+Space' }
     },
     'scroll-to-previous': {
       description: 'Scroll to the previous image',
-      suggested_key: {
-        default: 'Ctrl+Shift+Space'
-      }
+      suggested_key: { default: 'Ctrl+Shift+Space' }
     }
   },
   homepage_url: pkg.homepage,

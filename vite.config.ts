@@ -10,9 +10,7 @@ const config = defineConfig({
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'scroll-to-image': 'src/scroll-to-image.ts'
       },
-      output: {
-        entryFileNames: '[name].js'
-      }
+      output: { entryFileNames: '[name].js' }
     }
   },
   plugins: [react(), crx({ manifest })]

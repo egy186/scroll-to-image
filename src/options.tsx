@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-empty-named-blocks, import/no-unassigned-import
+// eslint-disable-next-line import-x/no-empty-named-blocks, import-x/no-unassigned-import
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import { Container, CssBaseline, StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material';
 import { AppBar } from './components/AppBar.js';

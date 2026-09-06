@@ -1,7 +1,7 @@
 import { Close, Delete, Edit, Save } from '@mui/icons-material';
 import { GridActionsCell, GridActionsCellItem } from '@mui/x-data-grid';
 import type { GridRenderCellParams, GridRowId } from '@mui/x-data-grid';
-import { createContext, useCallback, useContext } from 'react';
+import { createContext, use, useCallback } from 'react';
 import type { JSX } from 'react';
 
 interface DataGridActionsHandlers {
@@ -19,12 +19,13 @@ const DataGridActionsHandlersContext = createContext<DataGridActionsHandlers>({
   isInEditMode: () => false,
   save: () => undefined
 });
+DataGridActionsHandlersContext.displayName = 'DataGridActionsHandlersContext';
 
 // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
 const DataGridActions = (props: GridRenderCellParams): JSX.Element => {
   const { id } = props;
 
-  const { cancel, delete: deleteFn, edit, isInEditMode, save } = useContext(DataGridActionsHandlersContext);
+  const { cancel, delete: deleteFn, edit, isInEditMode, save } = use(DataGridActionsHandlersContext);
 
   const handleCancelClick = useCallback(() => {
     cancel(id);

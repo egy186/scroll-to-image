@@ -34,10 +34,10 @@
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.7.1",
-    "@egy186/eslint-config": "^5.0.0",
+    "@egy186/eslint-config": "^5.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@eslint-react/eslint-plugin": "^5.18.8",
+    "@eslint-react/eslint-plugin": "^5.19.0",
     "@mui/icons-material": "^9.4.0",
     "@mui/material": "^9.2.0",
     "@mui/x-data-grid": "^9.13.0",

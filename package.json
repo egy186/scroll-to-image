@@ -41,7 +41,7 @@
     "@mui/icons-material": "^9.4.0",
     "@mui/material": "^9.2.0",
     "@mui/x-data-grid": "^9.14.0",
-    "@types/firefox-webext-browser": "^143.0.0",
+    "@types/firefox-webext-browser": "^143.0.1",
     "@types/node": "^26.6.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

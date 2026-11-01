@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 
 const config = defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'scroll-to-image': 'src/scroll-to-image.ts'

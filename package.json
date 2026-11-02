@@ -40,7 +40,7 @@
     "@eslint-react/eslint-plugin": "^5.28.8",
     "@mui/icons-material": "^9.5.0",
     "@mui/material": "^9.2.0",
-    "@mui/x-data-grid": "^9.16.0",
+    "@mui/x-data-grid": "^9.17.0",
     "@types/firefox-webext-browser": "^143.0.1",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
